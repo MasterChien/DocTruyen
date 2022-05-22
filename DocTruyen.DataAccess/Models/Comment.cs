@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace DocTruyen.DataAccess.Models
+﻿namespace DocTruyen.DataAccess.Models
 {
     public class Comment
     {
-        [Key]
+        #region Properties
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
-
-        [MaxLength(1000)]
         public string Text { get; set; }
+        #endregion
 
-        //Relationship
+        #region RelationShips
         public List<Reply> Replies { get; set; }
 
         public int UserId { get; set; }
@@ -21,6 +16,7 @@ namespace DocTruyen.DataAccess.Models
 
         public int NovelId { get; set; }
         public Novel Novel { get; set; }
+        #endregion
 
     }
 }

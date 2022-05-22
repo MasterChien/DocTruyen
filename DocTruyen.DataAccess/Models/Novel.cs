@@ -1,31 +1,20 @@
 ﻿using DocTruyen.DataAccess.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DocTruyen.DataAccess.Models
 {
     public class Novel
     {
-        [Key]
+        #region Properties
         public int Id { get; set; }
-
-        [Required(ErrorMessage ="Không được để trống tên truyện")]
-        [MaxLength(250, ErrorMessage ="Tên truyện không được vượt qus 250 ký tự")]
         public string Name { get; set; }
-
-        [Required(ErrorMessage = "Không được để trống phần giới thiệu")]
-        [MaxLength(1000)]
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public NovelStatus Status { get; set; }
-
-        [Column(TypeName ="float(1,1)")]
         public double Rating { get; set; }
         public int TotalChapter { get; set; }
+        #endregion
 
-        //Relationship
+        #region RelationShips
         public int AuthorId { get; set; }
         public Author Author { get; set; }
 
@@ -39,5 +28,6 @@ namespace DocTruyen.DataAccess.Models
         public List<Image> Images { get; set; }
         public List<Chapter> Chapters { get; set; }
         public List<UserReadingLog> UserReadingLogs { get; set; }
+        #endregion
     }
 }

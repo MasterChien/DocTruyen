@@ -1,22 +1,19 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DocTruyen.DataAccess.Models
+﻿namespace DocTruyen.DataAccess.Models
 {
     public class Reply
     {
-        [Key]
+        #region Properties
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
-        [MaxLength(1000)]
         public string Text { get; set; }
+        #endregion
 
-        // Relationship
+        #region RelationShips
         public int CommentId { get; set; }
         public Comment Comment { get; set; }
 
         public int UserId { get; set; }
         public AppUser User { get; set; }
+        #endregion
     }
 }
