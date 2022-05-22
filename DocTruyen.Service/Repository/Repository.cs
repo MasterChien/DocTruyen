@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace DocTruyen.Service.Repository
 {
@@ -89,20 +90,20 @@ namespace DocTruyen.Service.Repository
         #endregion
 
         #region Paging
-        //public async Task<IPagedList<T>> GetPagedListAsync(RequestParam requestParam = null, List<string> includes = null)
-        //{
-        //    IQueryable<T> query = _db;
+        public async Task<IPagedList<T>> GetPagedListAsync(RequestParams requestParams = null, List<string> includes = null)
+        {
+            IQueryable<T> query = _db;
 
-        //    if (includes != null)
-        //    {
-        //        foreach (var includeProperty in includes)
-        //        {
-        //            query = query.Include(includeProperty);
-        //        }
-        //    }
+            if (includes != null)
+            {
+                foreach (var includeProperty in includes)
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
 
-        //    return await query.AsNoTracking().ToPagedListAsync(requestParam.PageNumber, requestParam.PageSize);
-        //}
+            return await query.AsNoTracking().ToPagedListAsync(requestParams.PageNumber, requestParams.PageSize);
+        }
         #endregion
     }
 }

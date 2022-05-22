@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
+using X.PagedList;
 
 namespace DocTruyen.Service.IRepository
 {
@@ -13,7 +10,7 @@ namespace DocTruyen.Service.IRepository
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             List<string> includes = null
             );
-        //Task<IPagedList<T>> GetPagedListAsync(RequestParam requestParam = null, List<string> includes = null);
+        Task<IPagedList<T>> GetPagedListAsync(RequestParams requestParams = null, List<string> includes = null);
         Task<T> GetAysnc(Expression<Func<T, bool>> expression, List<string> includes = null);
         Task AddAsync(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);
