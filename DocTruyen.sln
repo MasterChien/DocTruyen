@@ -5,6 +5,10 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocTruyen", "DocTruyen\DocTruyen.csproj", "{ECC41F44-CD01-4547-BEC7-2AAD830F6A67}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocTruyen.DataAccess", "DocTruyen.DataAccess\DocTruyen.DataAccess.csproj", "{0676B14E-DD26-49CF-9CC1-4B66A1BC7901}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocTruyen.Service", "DocTruyen.Service\DocTruyen.Service.csproj", "{538A63EA-CB87-4EB6-BD73-69601EAB3FD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{ECC41F44-CD01-4547-BEC7-2AAD830F6A67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECC41F44-CD01-4547-BEC7-2AAD830F6A67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECC41F44-CD01-4547-BEC7-2AAD830F6A67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0676B14E-DD26-49CF-9CC1-4B66A1BC7901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0676B14E-DD26-49CF-9CC1-4B66A1BC7901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0676B14E-DD26-49CF-9CC1-4B66A1BC7901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0676B14E-DD26-49CF-9CC1-4B66A1BC7901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{538A63EA-CB87-4EB6-BD73-69601EAB3FD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{538A63EA-CB87-4EB6-BD73-69601EAB3FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{538A63EA-CB87-4EB6-BD73-69601EAB3FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{538A63EA-CB87-4EB6-BD73-69601EAB3FD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
