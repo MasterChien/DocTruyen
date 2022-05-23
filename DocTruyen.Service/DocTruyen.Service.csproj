@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocTruyen.DataAccess\DocTruyen.DataAccess.csproj" />
+    <ProjectReference Include="..\DocTruyen.ViewModels\DocTruyen.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

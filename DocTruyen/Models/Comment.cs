@@ -1,22 +1,26 @@
-﻿namespace DocTruyen.DataAccess.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace DocTruyen.DataAccess.Models
 {
     public class Comment
     {
-        #region Properties
+        [Key]
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string Text { get; set; }
-        #endregion
 
-        #region RelationShips
+        [MaxLength(1000)]
+        public string Text { get; set; }
+
+        //Relationship
         public List<Reply> Replies { get; set; }
 
         public int UserId { get; set; }
-        public  AppUser User { get; set; }
+        public  AppUserVM User { get; set; }
 
         public int NovelId { get; set; }
         public Novel Novel { get; set; }
-        #endregion
 
     }
 }

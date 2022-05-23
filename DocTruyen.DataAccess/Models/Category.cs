@@ -1,17 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace DocTruyen.DataAccess.Models
+﻿namespace DocTruyen.DataAccess.Models
 {
     public class Category
     {
-        [Key]
+        #region Properties
         public int Id { get; set; }
-
-        [Required]
-        [MaxLength(50)]
         public string Name { get; set; }
-        [MaxLength(200)]
         public string Description { get; set; }
+        #endregion
 
     }
 }

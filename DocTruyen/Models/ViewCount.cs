@@ -1,19 +1,29 @@
-﻿namespace DocTruyen.DataAccess.Models
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace DocTruyen.DataAccess.Models
 {
     public class ViewCount
     {
-        #region Properties
+        [Key]
         public int Id { get; set; }
+        [DefaultValue(0)]
         public int DayCount { get; set; }
-        public int WeekCount { get; set; }
-        public int MonthCount { get; set; }
-        public int YearCount { get; set; }
-        public int OverallCount { get; set; }
-        #endregion
 
-        #region RelationShips
+        [DefaultValue(0)]
+        public int WeekCount { get; set; }
+
+        [DefaultValue(0)]
+        public int MonthCount { get; set; }
+
+        [DefaultValue(0)]
+        public int YearCount { get; set; }
+
+        [DefaultValue(0)]
+        public int OverallCount { get; set; }
+
+        //Relationship
         public int NovelId { get; set; }
         public Novel Novel { get; set; }
-        #endregion
     }
 }

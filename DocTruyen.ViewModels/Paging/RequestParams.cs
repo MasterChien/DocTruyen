@@ -1,5 +1,4 @@
-﻿
-namespace DocTruyen.Service
+﻿namespace DocTruyen.ViewModels.Paging
 {
     public class RequestParams
     {

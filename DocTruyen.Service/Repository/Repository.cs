@@ -1,11 +1,8 @@
 ﻿using DocTruyen.DataAccess.Data;
 using DocTruyen.Service.IRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using DocTruyen.ViewModels.Paging;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using X.PagedList;
 
 namespace DocTruyen.Service.Repository

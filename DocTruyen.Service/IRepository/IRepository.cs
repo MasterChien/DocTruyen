@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using X.PagedList;
-
+using DocTruyen.ViewModels.Paging;
 namespace DocTruyen.Service.IRepository
 {
     public interface IRepository<T> where T : class
