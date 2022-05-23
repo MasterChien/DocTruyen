@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace DocTruyen.Controllers
+namespace DocTruyen.Areas.User.Controllers
 {
     public class HomeController : Controller
     {

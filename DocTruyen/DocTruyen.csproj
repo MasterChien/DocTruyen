@@ -8,11 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DocTruyen.DataAccess\DocTruyen.DataAccess.csproj" />
     <ProjectReference Include="..\DocTruyen.Service\DocTruyen.Service.csproj" />
+    <ProjectReference Include="..\DocTruyen.ViewModels\DocTruyen.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\User\Controllers\Components\" />
   </ItemGroup>
 
 </Project>
