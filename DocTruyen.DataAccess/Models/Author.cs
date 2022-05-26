@@ -10,6 +10,7 @@
         #endregion
 
         #region RelationShips
+        //public List<Image> Images { get; set; }
         public List<Novel> Novels { get; set; }
         #endregion
     }

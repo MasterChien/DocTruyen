@@ -1,17 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "List Categories";
+    ViewData["Title"] = "Danh sách tác giả";
 }
-@using DocTruyen.Service.DTOs.Category
+@using DocTruyen.Service.DTOs.Author
 @using X.PagedList
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Web.Common
 
+@model IPagedList<AuthorViewModel>
 
-@model IPagedList<CategoryDTO>
-
-<div class="container bg-light rounded-3">
+    <div class="container bg-light rounded-3">
     <div class="row pb-3">
-        <h3 class="text-center">Danh Sách Thể Loại</h3>
+        <h3 class="text-center">Danh Sách Tác Giả</h3>
         <div class="col-md-4">
             <form class="d-inline-flex">
                 <input class="form-control" type="text" style="margin-right:5px" placeholder="Tìm kiếm">
@@ -21,34 +20,34 @@
         <div class="col-md-5">
         </div>
         <div class="col-md-3 d-flex align-items-end">
-            <a class="btn btn-outline-primary" asp-action="Create">Thêm thể loại mới</a>
+            <a class="btn btn-outline-primary" asp-action="Create">Thêm tác giả mới</a>
         </div>
     </div>
     <div class="row">
         <table class="table table-hover">
             <thead class="">
                 <tr class="table-active ">
-                    <th class="col-md-4">@Html.DisplayNameFor(model => model.First().Name)</th>
-                    <th class="col-md-5">@Html.DisplayNameFor(model => model.First().Description)</th>
-                    <th class="col-md-3">Thao Tác</th>
-                    @* @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                    <th>Actions</th>
-                    }*@
+                    <th class="col-md-3">@Html.DisplayNameFor(model => model.First().ProfileImgUrl)</th>
+                    <th class="col-md-3">@Html.DisplayNameFor(model => model.First().Name)</th>
+                    <th class="col-md-4">@Html.DisplayNameFor(model => model.First().Description)</th>
+                    <th class="col-md-2">Thao Tác</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var category in Model)
+                @foreach (var author in Model)
                 {
                     <tr class="">
-                        <td class="col-md-4">@category.Name</td>
-                        <td class="col-md-5">@category.Description</td>
                         <td class="col-md-3">
-                            <a class="btn btn-outline-primary" asp-action="Update" asp-route-id="@category.Id" asp-route-categoryDTO="@category" style="margin-right:5px">
+                            <img class="rounded-circle" src="@author.ProfileImgUrl" alt="@author.Name" style="max-width: 150px" />
+                        </td>
+                        <td class="col-md-3">@author.Name</td>
+                        <td class="col-md-4">@author.Description</td>
+                        <td class="col-md-2">
+                            <a class="btn btn-outline-primary" asp-action="Update" asp-route-id="@author.Id" asp-route-categoryDTO="@author" style="margin-right:5px">
                                 <i class="bi bi-pencil-square"></i>
                                 Sửa 
                             </a>
-                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@category.Id">
+                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@author.Id">
                                 <i class="bi bi-trash"></i>
                                 Xóa 
                             </a>
@@ -76,4 +75,3 @@
         </div>
     </div>
 </div>
-

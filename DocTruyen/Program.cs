@@ -15,6 +15,7 @@ builder.Services.Configure<CloudinarySettings>(cloudinarySettings);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddAutoMapper(typeof(MapperInitilizer).Assembly);
 
 var app = builder.Build();
@@ -35,7 +36,7 @@ app.UseRouting();
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "Admin",
-    pattern: "{area=Admin}/{controller=Categories}/{action=Index}/{id?}");
+    pattern: "{area=Admin}/{controller=Authors}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "area",
