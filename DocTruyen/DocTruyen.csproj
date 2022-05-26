@@ -7,19 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DocTruyen.DataAccess\DocTruyen.DataAccess.csproj" />
-    <ProjectReference Include="..\DocTruyen.Service\DocTruyen.Service.csproj" />
-    <ProjectReference Include="..\DocTruyen.ViewModels\DocTruyen.ViewModels.csproj" />
+    <Folder Include="Areas\User\Controllers\Components\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\User\Controllers\Components\" />
+    <ProjectReference Include="..\DocTruyen.DataAccess\DocTruyen.DataAccess.csproj" />
+    <ProjectReference Include="..\DocTruyen.Service\DocTruyen.Service.csproj" />
   </ItemGroup>
 
 </Project>

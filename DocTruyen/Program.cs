@@ -1,4 +1,7 @@
 using DocTruyen.DataAccess.Data;
+using DocTruyen.Service.Helpers;
+using DocTruyen.Service.IRepository;
+using DocTruyen.Service.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
-builder.Services.AddDbContext<ApplicationDbContext>();
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddAutoMapper(typeof(MapperInitilizer).Assembly);
 
 var app = builder.Build();
 
@@ -25,9 +30,15 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{area=Admin}/{controller=Categories}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
+    name: "area",
+    pattern: "{area:exists}/{controller=AdminHome}/{action=Index}/{id?}");
+app.MapControllerRoute(
     name: "default",
-    pattern: "{area=User}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=AdminHome}/{action=Index}/{id?}");
 
 app.Run();
