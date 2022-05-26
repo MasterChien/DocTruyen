@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 
-namespace DocTruyen.DataAccess.Models
+namespace DocTruyen.ViewModels.Categories
 {
-    public class Category
+    public class CategoryVM
     {
-        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -12,6 +12,5 @@ namespace DocTruyen.DataAccess.Models
         public string Name { get; set; }
         [MaxLength(200)]
         public string Description { get; set; }
-
     }
 }

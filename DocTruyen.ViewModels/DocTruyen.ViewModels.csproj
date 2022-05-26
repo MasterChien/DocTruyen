@@ -15,4 +15,8 @@
     <ProjectReference Include="..\DocTruyen.DataAccess\DocTruyen.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Paging\" />
+  </ItemGroup>
+
 </Project>

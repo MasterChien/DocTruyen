@@ -1,6 +1,4 @@
 ﻿using DocTruyen.DataAccess.Models;
-using System;
-using System.Threading.Tasks;
 
 namespace DocTruyen.Service.IRepository
 {

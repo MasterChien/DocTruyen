@@ -1,9 +1,9 @@
 ﻿using DocTruyen.DataAccess.Data;
 using DocTruyen.Service.IRepository;
 using Microsoft.EntityFrameworkCore;
-using DocTruyen.ViewModels.Paging;
 using System.Linq.Expressions;
 using X.PagedList;
+//using X.PagedList;
 
 namespace DocTruyen.Service.Repository
 {
@@ -44,7 +44,7 @@ namespace DocTruyen.Service.Repository
             }
             return await query.AsNoTracking().FirstOrDefaultAsync(expression);
         }
-        public async Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includes = null)
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includes = null)
         {
             IQueryable<T> query = _db;
             if (expression != null)
@@ -87,7 +87,7 @@ namespace DocTruyen.Service.Repository
         #endregion
 
         #region Paging
-        public async Task<IPagedList<T>> GetPagedListAsync(RequestParams requestParams = null, List<string> includes = null)
+        public async Task<IPagedList<T>> GetPagedListAsync(int pageNumber = 1, int pageSize = 5, List<string> includes = null)
         {
             IQueryable<T> query = _db;
 
@@ -98,9 +98,8 @@ namespace DocTruyen.Service.Repository
                     query = query.Include(includeProperty);
                 }
             }
-
-            return await query.AsNoTracking().ToPagedListAsync(requestParams.PageNumber, requestParams.PageSize);
-        }
+            return await query.ToPagedListAsync(pageNumber, pageSize);
+        }  
         #endregion
     }
 }

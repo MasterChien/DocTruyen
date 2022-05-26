@@ -3,20 +3,18 @@ using DocTruyen.DataAccess.Extensions;
 using DocTruyen.DataAccess.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace DocTruyen.DataAccess.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<AppUser,AppRole,int>
+    public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, int>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {   
-
-        }
-
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             //Seed data
             modelBuilder.SeedAuthors();
             modelBuilder.SeedAppRoles();
