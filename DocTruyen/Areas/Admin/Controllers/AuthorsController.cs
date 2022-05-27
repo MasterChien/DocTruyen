@@ -13,10 +13,12 @@ namespace DocTruyen.Areas.Admin.Controllers
         #region Constructor
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public AuthorsController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IImageService _imageService;
+        public AuthorsController(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _imageService = imageService;
         }
         #endregion
 
@@ -40,13 +42,24 @@ namespace DocTruyen.Areas.Admin.Controllers
             return View();
         }
         //Post: Category
-        [ActionName("Create")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateAuthorDTO createAuthorDTO)
         {
             if (!ModelState.IsValid)
                 return View(createAuthorDTO);
-            var author = _mapper.Map<Author>(createAuthorDTO);
+            Author author = new Author();
+            if (createAuthorDTO.ProfileImgUrl!=null)
+            {
+                var result = await _imageService.AddImageAsync(createAuthorDTO.ProfileImgUrl);
+                if (result.Error != null) return View("NotFound");
+
+                author.PublicId = result.PublicId;
+                author.ProfileImgUrl = result.SecureUrl.AbsoluteUri;
+            }
+            author.Name = createAuthorDTO.Name;
+            author.Description = createAuthorDTO.Description;
+
+
             await _unitOfWork.Authors.AddAsync(author);
             await _unitOfWork.SaveAsync();
 
@@ -58,9 +71,15 @@ namespace DocTruyen.Areas.Admin.Controllers
         //Get:Category/id
         public async Task<IActionResult> Update(int id)
         {
-            var author = await _unitOfWork.Authors.GetAysnc(a => a.Id == id);
+            var author = await _unitOfWork.Authors.GetAysnc(a => a.Id == id, new List<string> { "Novels" });
             if (author == null) return View("NotFound");
-            return View(_mapper.Map<AuthorDTO>(author));
+            var authorDTO = new AuthorDTO
+            {
+                Id = author.Id,
+                Name = author.Name,
+                Description = author.Description
+            };
+            return View(authorDTO);
         }
 
         //Post:Category/id
@@ -69,10 +88,20 @@ namespace DocTruyen.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid) return View(authorDTO);
 
-            var author = await _unitOfWork.Authors.GetAysnc(c => c.Id == id);
+            var author = await _unitOfWork.Authors.GetAysnc(c => c.Id == id, new List<string> { "Novels" });
             if (author == null) return View("NotFound");
 
-            _mapper.Map(authorDTO, author);
+            if (authorDTO.ProfileImgUrl!=null)
+            {
+                var result = await _imageService.AddImageAsync(authorDTO.ProfileImgUrl);
+                if (result.Error != null) return View("NotFound");
+                author.PublicId = result.PublicId;
+                author.ProfileImgUrl = result.SecureUrl.AbsoluteUri;
+
+            }
+            author.Name = authorDTO.Name;
+            author.Description = authorDTO.Description;
+
             _unitOfWork.Authors.Update(author);
             await _unitOfWork.SaveAsync();
 
@@ -95,6 +124,11 @@ namespace DocTruyen.Areas.Admin.Controllers
         {
             var author = await _unitOfWork.Authors.GetAysnc(c => c.Id == id);
             if (author == null) return View("NotFound");
+            if (author.PublicId != null)
+            {
+                var result = await _imageService.DeleteImageAsync(author.PublicId);
+            }
+                
 
             await _unitOfWork.Authors.DeleteAsync(id);
             await _unitOfWork.SaveAsync();

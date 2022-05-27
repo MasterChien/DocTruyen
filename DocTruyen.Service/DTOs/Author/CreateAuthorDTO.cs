@@ -11,6 +11,8 @@ namespace DocTruyen.Service.DTOs.Author
         [Display(Name = "Tên tác giả")]
         public string Name { get; set; }
 
+        public string PublicId { get; set; }
+
         [Display(Name = "Giới thiệu")]
         public string Description { get; set; }
 

@@ -15,6 +15,15 @@ namespace DocTruyen.DataAccess.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            //Config
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new NovelConfiguration());
+            modelBuilder.ApplyConfiguration(new ChapterConfiguration());
+            modelBuilder.ApplyConfiguration(new CommentConfiguration());
+            modelBuilder.ApplyConfiguration(new ReplyConfiguration());
+            modelBuilder.ApplyConfiguration(new ImageConfiguration());
+            modelBuilder.ApplyConfiguration(new UserReadingLogConfiguration());
+
             //Seed data
             modelBuilder.SeedAuthors();
             modelBuilder.SeedAppRoles();
