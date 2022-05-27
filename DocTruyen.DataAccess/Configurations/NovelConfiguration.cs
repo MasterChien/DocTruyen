@@ -12,12 +12,12 @@ namespace DocTruyen.DataAccess.Configurations
             builder.HasOne(n => n.Publisher)
                 .WithMany(u => u.Novels)
                 .HasForeignKey(n => n.PublisherId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasOne(n => n.Author)
                 .WithMany(a => a.Novels)
                 .HasForeignKey(n => n.AuthorId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
 
         }
     }

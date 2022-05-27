@@ -4,6 +4,7 @@ using AutoMapper;
 using X.PagedList;
 using DocTruyen.DataAccess.Models;
 using DocTruyen.Service.DTOs.Author;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DocTruyen.Areas.Admin.Controllers
 {
@@ -23,14 +24,24 @@ namespace DocTruyen.Areas.Admin.Controllers
         #endregion
 
         #region Index
-        public async Task<IActionResult> Index(int? page = 1)
+        [Route("{page?}/{keyWord?}")]
+        public async Task<IActionResult> Index(int page, string keyWord)
         {
             const int pageSize = 5;
-            var pageNumber = page ?? 1;
+            page = page < 1?1:page;
+            
+            if (!string.IsNullOrEmpty(keyWord))
+            {
+                var authors = await _unitOfWork.Authors.GetAllAsync(a => a.Name.Contains(keyWord));
+                var viewmodel = _mapper.Map<IEnumerable<AuthorViewModel>>(authors);
+                IPagedList<AuthorViewModel> pagedModel = new StaticPagedList<AuthorViewModel>(viewmodel, page, pageSize, viewmodel.Count());
+                return View(pagedModel);
+            }
 
-            var authors = await _unitOfWork.Authors.GetPagedListAsync(pageNumber, pageSize);
-            IEnumerable<AuthorViewModel> dto = _mapper.Map<IEnumerable<AuthorViewModel>>(authors);
-            IPagedList<AuthorViewModel> pagedDto = new StaticPagedList<AuthorViewModel>(dto, authors.GetMetaData());
+            var pagedAuthors = await _unitOfWork.Authors.GetPagedListAsync(null, page, 1);
+            IEnumerable<AuthorViewModel> dto = _mapper.Map<IEnumerable<AuthorViewModel>>(pagedAuthors);
+            IPagedList<AuthorViewModel> pagedDto = new StaticPagedList<AuthorViewModel>(dto, pagedAuthors.GetMetaData());
+
             return View(pagedDto);
         }
         #endregion
@@ -41,14 +52,14 @@ namespace DocTruyen.Areas.Admin.Controllers
         {
             return View();
         }
-        //Post: Category
+        //Post: Author
         [HttpPost]
         public async Task<IActionResult> Create(CreateAuthorDTO createAuthorDTO)
         {
             if (!ModelState.IsValid)
                 return View(createAuthorDTO);
             Author author = new Author();
-            if (createAuthorDTO.ProfileImgUrl!=null)
+            if (createAuthorDTO.ProfileImgUrl != null)
             {
                 var result = await _imageService.AddImageAsync(createAuthorDTO.ProfileImgUrl);
                 if (result.Error != null) return View("NotFound");
@@ -68,7 +79,7 @@ namespace DocTruyen.Areas.Admin.Controllers
         #endregion
 
         #region Update
-        //Get:Category/id
+        //Get:Author/id
         public async Task<IActionResult> Update(int id)
         {
             var author = await _unitOfWork.Authors.GetAysnc(a => a.Id == id, new List<string> { "Novels" });
@@ -91,7 +102,7 @@ namespace DocTruyen.Areas.Admin.Controllers
             var author = await _unitOfWork.Authors.GetAysnc(c => c.Id == id, new List<string> { "Novels" });
             if (author == null) return View("NotFound");
 
-            if (authorDTO.ProfileImgUrl!=null)
+            if (authorDTO.ProfileImgUrl != null)
             {
                 var result = await _imageService.AddImageAsync(authorDTO.ProfileImgUrl);
                 if (result.Error != null) return View("NotFound");
@@ -107,6 +118,27 @@ namespace DocTruyen.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        #endregion
+
+        #region Search
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Search(int page, string keyWord)
+        //{
+        //    if (!string.IsNullOrEmpty(keyWord)) return View();
+
+        //    ViewData["keyWord"] = keyWord;
+        //    var authors = await _unitOfWork.Authors.GetAllAsync(a => a.Name.Contains(keyWord));
+
+        //    var viewmodel = _mapper.Map<IEnumerable<AuthorViewModel>>(authors);
+        //    //var models = authors.Select(a =>
+        //    //{
+        //    //    return _mapper.Map<AuthorViewModel>(a);
+        //    //});
+        //    if (page == 0) page = 1;
+        //    IPagedList<AuthorViewModel> pagedDto = new StaticPagedList<AuthorViewModel>(viewmodel, page, 5, viewmodel.Count());
+
+        //    return View("Index", pagedDto);
+        //}
         #endregion
 
         #region Delete
@@ -128,7 +160,7 @@ namespace DocTruyen.Areas.Admin.Controllers
             {
                 var result = await _imageService.DeleteImageAsync(author.PublicId);
             }
-                
+
 
             await _unitOfWork.Authors.DeleteAsync(id);
             await _unitOfWork.SaveAsync();
