@@ -29,5 +29,11 @@
             }
             return str;
         }
+        public static string GetFiftyWord(this string str)
+        {
+            str.Trim();
+            int i = str.IndexOf(" ", 50);
+            return i < 50 ? str : str.Substring(0, i);
+        }
     }
 }
