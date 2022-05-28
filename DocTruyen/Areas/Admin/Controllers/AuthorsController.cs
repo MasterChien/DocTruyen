@@ -24,7 +24,6 @@ namespace DocTruyen.Areas.Admin.Controllers
         #endregion
 
         #region Index
-        [Route("{page?}/{keyWord?}")]
         public async Task<IActionResult> Index(int page, string keyWord)
         {
             const int pageSize = 5;

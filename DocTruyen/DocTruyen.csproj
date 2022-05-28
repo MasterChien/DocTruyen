@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\User\Controllers\Components\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DocTruyen.DataAccess\DocTruyen.DataAccess.csproj" />
     <ProjectReference Include="..\DocTruyen.Service\DocTruyen.Service.csproj" />
   </ItemGroup>
