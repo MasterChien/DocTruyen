@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using DocTruyen.Service.DTOs.Category;
 using X.PagedList;
-using DocTruyen.Service.Helpers;
 using DocTruyen.DataAccess.Models;
 
 namespace DocTruyen.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
     public class CategoriesController : Controller
     {
         #region Constructor
@@ -28,7 +26,7 @@ namespace DocTruyen.Areas.Admin.Controllers
             const int pageSize = 5;
             var pageNumber = page ?? 1;
 
-            var categories = await _unitOfWork.Categories.GetPagedListAsync(pageNumber, pageSize);
+            var categories = await _unitOfWork.Categories.GetPagedListAsync(null,pageNumber, pageSize);
             IEnumerable<CategoryDTO> dto = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
             IPagedList<CategoryDTO> pagedDto = new StaticPagedList<CategoryDTO>(dto, categories.GetMetaData());
             return View(pagedDto);
@@ -44,11 +42,11 @@ namespace DocTruyen.Areas.Admin.Controllers
         //Post: Category
         [ActionName("Create")]
         [HttpPost]
-        public async Task<IActionResult> Create(CategoryDTO categoryDTO)
+        public async Task<IActionResult> Create(CreateCategoryDTO createCategoryDTO)
         {
             if (!ModelState.IsValid)
-                return View(categoryDTO);
-            var category = _mapper.Map<Category>(categoryDTO);
+                return View(createCategoryDTO);
+            var category = _mapper.Map<Category>(createCategoryDTO);
             await _unitOfWork.Categories.AddAsync(category);
             await _unitOfWork.SaveAsync();
 

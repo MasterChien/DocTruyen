@@ -10,7 +10,7 @@ namespace DocTruyen.Service.IRepository
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             List<string> includes = null
             );
-        Task<IPagedList<T>> GetPagedListAsync(int pageNumber = 1,int pageSize = 5, List<string> includes = null);
+        Task<IPagedList<T>> GetPagedListAsync(Expression<Func<T, bool>> expression = null, int pageNumber = 1,int pageSize = 5, List<string> includes = null);
         //Task<PagedList<T>> PagedListAsync(int pageNumber = 1,int pageSize = 5, List<string> includes = null);
         Task<T> GetAysnc(Expression<Func<T, bool>> expression, List<string> includes = null);
         Task AddAsync(T entity);

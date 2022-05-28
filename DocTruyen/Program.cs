@@ -9,9 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+var cloudinarySettings = builder.Configuration.GetSection("CloudinarySettings");
+builder.Services.Configure<CloudinarySettings>(cloudinarySettings);
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddAutoMapper(typeof(MapperInitilizer).Assembly);
 
 var app = builder.Build();
@@ -30,9 +34,14 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.MapDefaultControllerRoute();
 app.MapControllerRoute(
     name: "Admin",
-    pattern: "{area=Admin}/{controller=Categories}/{action=Index}/{id?}");
+    pattern: "{area=Admin}/{controller=Authors}/{action=Index}");
+
+app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{area=Admin}/{controller=Authors}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "area",

@@ -87,10 +87,14 @@ namespace DocTruyen.Service.Repository
         #endregion
 
         #region Paging
-        public async Task<IPagedList<T>> GetPagedListAsync(int pageNumber = 1, int pageSize = 5, List<string> includes = null)
+        public async Task<IPagedList<T>> GetPagedListAsync(Expression<Func<T, bool>> expression = null, int pageNumber = 1, int pageSize = 5, List<string> includes = null)
         {
             IQueryable<T> query = _db;
 
+            if (expression != null)
+            {
+                query = query.Where(expression);
+            }
             if (includes != null)
             {
                 foreach (var includeProperty in includes)

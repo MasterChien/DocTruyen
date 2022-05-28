@@ -58,7 +58,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "864a0858-9a21-4053-8ba5-d08c3209e1a1",
+                            ConcurrencyStamp = "ffb53ccc-9787-40a8-a066-e9964294cc30",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -66,7 +66,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "8da955f5-252a-4f6d-a681-ebcca8ef8f57",
+                            ConcurrencyStamp = "d19fedc1-c0e6-4ebb-b9d5-3419ba016671",
                             Description = "user role",
                             Name = "user",
                             NormalizedName = "user"
@@ -157,7 +157,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cfcdc763-fb2d-4c1c-b24e-007636ac5936",
+                            ConcurrencyStamp = "5d328840-8947-4401-b57d-43e64afa0194",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "masterchienboy@gmail.com",
                             EmailConfirmed = true,
@@ -166,7 +166,7 @@ namespace DocTruyen.DataAccess.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "masterchienboy@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGZj2iXkOd/ntRoZAxstpyly6tfmPAGouGY+h0pV50q0VSWtkpp7iEGhzx7QoEdJ+Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHzkqevVUdNGmjwc3mGobvDj8lQTNXWY/QB/RamglVH7yY8SvYWLE/Yt2t2giFwoNA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -176,7 +176,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cf456a2b-40db-43a0-9817-e257cb05d771",
+                            ConcurrencyStamp = "cee6a158-92a0-4210-afcb-9e678e61203e",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user1@gmail.com",
                             EmailConfirmed = true,
@@ -185,7 +185,7 @@ namespace DocTruyen.DataAccess.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user1@gmail.com",
                             NormalizedUserName = "user1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHVHr6VsSI6khpNl4IjBVip2BIEdFAzYZhEbvzKoGj2B2VvHVArTmMJc1M5mbujkEg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECoNLzOZmNS7GEvbZwXNxwXlAJdWtB2V2V5hZ7yCOtWXFhHlUs/Xr7zasF4CsyyFPQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -195,7 +195,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6e17d472-8f8e-4541-8dc0-2f2bd456a648",
+                            ConcurrencyStamp = "83879450-53c6-49d3-8417-a75223543611",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user2@gmail.com",
                             EmailConfirmed = true,
@@ -204,7 +204,7 @@ namespace DocTruyen.DataAccess.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user2@gmail.com",
                             NormalizedUserName = "user2",
-                            PasswordHash = "AQAAAAEAACcQAAAAENLv3FiI+CcSqf39lqMgczK4DwU+fmoNONMENjRpH2inntRlG/ndlSz+K5TdFdTDOA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECM/8NyhrTaJdEcfCI7h997sQedhVLDPgC4rOAdy84TUCaLNjZN/GXi23sJVR/sy+Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -224,11 +224,12 @@ namespace DocTruyen.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfileImgUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -268,13 +269,10 @@ namespace DocTruyen.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -319,8 +317,7 @@ namespace DocTruyen.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -335,7 +332,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 1,
                             ContentPath = "Đây là nội dung chương 1",
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2426),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5802),
                             Index = 1,
                             NovelId = 1,
                             PublisherId = 2,
@@ -345,7 +342,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 2,
                             ContentPath = "Đây là nội dung chương 2",
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2429),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5805),
                             Index = 2,
                             NovelId = 1,
                             PublisherId = 2,
@@ -355,7 +352,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 3,
                             ContentPath = "Đây là nội dung chương 3",
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2430),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5806),
                             Index = 3,
                             NovelId = 1,
                             PublisherId = 2,
@@ -365,7 +362,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 4,
                             ContentPath = "Đây là nội dung chương 1 truyện Già Thiên",
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2432),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5808),
                             Index = 1,
                             NovelId = 2,
                             PublisherId = 3,
@@ -388,8 +385,7 @@ namespace DocTruyen.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -406,7 +402,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2454),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5830),
                             NovelId = 1,
                             Text = "Truyện rất hay",
                             UserId = 2
@@ -414,7 +410,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2456),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5834),
                             NovelId = 1,
                             Text = "Truyện rất hay",
                             UserId = 3
@@ -422,7 +418,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2458),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5835),
                             NovelId = 2,
                             Text = "Truyện như lone",
                             UserId = 3
@@ -438,8 +434,7 @@ namespace DocTruyen.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Caption")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FileSize")
                         .HasColumnType("int");
@@ -449,6 +444,9 @@ namespace DocTruyen.DataAccess.Migrations
 
                     b.Property<int>("NovelId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -465,7 +463,7 @@ namespace DocTruyen.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AuthorId")
+                    b.Property<int?>("AuthorId")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
@@ -475,20 +473,16 @@ namespace DocTruyen.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PublisherId")
+                    b.Property<int?>("PublisherId")
                         .HasColumnType("int");
 
                     b.Property<double>("Rating")
-                        .HasColumnType("float(1)");
+                        .HasColumnType("float");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -500,7 +494,8 @@ namespace DocTruyen.DataAccess.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryId")
+                        .IsUnique();
 
                     b.HasIndex("PublisherId");
 
@@ -512,7 +507,7 @@ namespace DocTruyen.DataAccess.Migrations
                             Id = 1,
                             AuthorId = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2379),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5760),
                             Description = "- Từ Địa Cầu xuyên việt tới Dị giới đã thấy nhiều, nhưng Diệp Mặc của chúng ta lại từ Dị giới xuyên tới Địa Cầu.Điều này còn chưa phải là buồn bực nhất, để cho Diệp Mặc phát điên chính là cậu nhỏ của hắn bị liệt.",
                             Name = "Thiếu gia bị bỏ rơi",
                             PublisherId = 2,
@@ -525,7 +520,7 @@ namespace DocTruyen.DataAccess.Migrations
                             Id = 2,
                             AuthorId = 2,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2394),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5771),
                             Description = "Trong vũ trụ bao la, một mảnh tinh hệ sinh diệt, cũng bất quá là sát na pha tạp lưu quang.Ngắm nhìn bầu trời, luôn có loại thương cảm kết cục đã nhất định,trăm ngàn năm sau ngươi ta ở đâu ? Gia quốc, ánh lửa văn minh,Địa Cầu, đều chẳng qua là trong thâm không một hạt bụi.",
                             Name = "Già Thiên",
                             PublisherId = 3,
@@ -550,8 +545,7 @@ namespace DocTruyen.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Text")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -569,7 +563,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 1,
                             CommentId = 1,
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2485),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5870),
                             Text = "Đồng quan điểm",
                             UserId = 3
                         },
@@ -577,7 +571,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 2,
                             CommentId = 1,
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2487),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5872),
                             Text = "Bạc quan điểm",
                             UserId = 1
                         },
@@ -585,7 +579,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 3,
                             CommentId = 3,
-                            CreatedDate = new DateTime(2022, 5, 22, 12, 12, 43, 825, DateTimeKind.Local).AddTicks(2488),
+                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5874),
                             Text = "Truyện như lone",
                             UserId = 3
                         });
@@ -765,7 +759,7 @@ namespace DocTruyen.DataAccess.Migrations
                     b.HasOne("DocTruyen.DataAccess.Models.AppUser", "Publisher")
                         .WithMany("Chapters")
                         .HasForeignKey("PublisherId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Novel");
@@ -808,20 +802,18 @@ namespace DocTruyen.DataAccess.Migrations
                     b.HasOne("DocTruyen.DataAccess.Models.Author", "Author")
                         .WithMany("Novels")
                         .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("DocTruyen.DataAccess.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("Novel")
+                        .HasForeignKey("DocTruyen.DataAccess.Models.Novel", "CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("DocTruyen.DataAccess.Models.AppUser", "Publisher")
                         .WithMany("Novels")
                         .HasForeignKey("PublisherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Author");
 
@@ -835,7 +827,7 @@ namespace DocTruyen.DataAccess.Migrations
                     b.HasOne("DocTruyen.DataAccess.Models.Comment", "Comment")
                         .WithMany("Replies")
                         .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("DocTruyen.DataAccess.Models.AppUser", "User")
@@ -946,6 +938,11 @@ namespace DocTruyen.DataAccess.Migrations
             modelBuilder.Entity("DocTruyen.DataAccess.Models.Author", b =>
                 {
                     b.Navigation("Novels");
+                });
+
+            modelBuilder.Entity("DocTruyen.DataAccess.Models.Category", b =>
+                {
+                    b.Navigation("Novel");
                 });
 
             modelBuilder.Entity("DocTruyen.DataAccess.Models.Comment", b =>
