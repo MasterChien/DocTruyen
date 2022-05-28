@@ -1,7 +1,6 @@
 ﻿using DocTruyen.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace DocTruyen.DataAccess.Extensions
 {
     public static class AuthorSeedingData
