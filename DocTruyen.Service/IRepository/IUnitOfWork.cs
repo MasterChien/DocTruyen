@@ -12,7 +12,6 @@ namespace DocTruyen.Service.IRepository
         IRepository<Chapter> Chapters { get; }
         IRepository<Image> Images { get; }
         IRepository<Novel> Novels { get; }
-        IRepository<Reply> Replies { get; }
         IRepository<UserReadingLog> UserReadingLogs { get; }
         IRepository<ViewCount> ViewCounts { get; }
         Task SaveAsync();

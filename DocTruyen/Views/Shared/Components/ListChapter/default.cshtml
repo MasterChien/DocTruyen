@@ -1,0 +1,18 @@
+﻿@using DocTruyen.Service.DTOs.Chapter
+@model IEnumerable<ChapterViewDTO>
+
+<div class="container bg-light rounded-3">
+    <div class="row pt-3">
+        <h3>Danh Sách Chương</h3>
+    </div>
+    <div class="row">
+
+        @foreach (var chapter in Model)
+        {
+            <a class="col-md-4" asp-action="Read" asp-route-id="@chapter.Id">
+                Chương @chapter.Index: @chapter.Title (@chapter.CreatedDate)
+            </a>
+        }
+
+    </div>
+</div>

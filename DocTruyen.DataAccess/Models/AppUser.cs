@@ -17,8 +17,8 @@ namespace DocTruyen.DataAccess.Models
         public List<Novel> Novels { get; set; }
         public List<Comment> Comments { get; set; }
         public List<Chapter> Chapters { get; set; }
-        public List<Reply> Replies { get; set; }
         public List<UserReadingLog> UserReadingLogs { get; set; }
+        public ICollection<AppUseRole> UserRoles { get; set; }
         #endregion
 
     }

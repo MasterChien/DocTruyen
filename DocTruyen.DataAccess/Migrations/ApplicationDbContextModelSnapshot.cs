@@ -58,7 +58,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "ffb53ccc-9787-40a8-a066-e9964294cc30",
+                            ConcurrencyStamp = "bc00f3d4-740d-48be-bc83-8c0e1d93d7fb",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -66,7 +66,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "d19fedc1-c0e6-4ebb-b9d5-3419ba016671",
+                            ConcurrencyStamp = "d90daee0-4361-4919-8da0-c0d4ae1f6d8f",
                             Description = "user role",
                             Name = "user",
                             NormalizedName = "user"
@@ -157,7 +157,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5d328840-8947-4401-b57d-43e64afa0194",
+                            ConcurrencyStamp = "b31f972b-9f81-4212-a903-0dfc5b6f5875",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "masterchienboy@gmail.com",
                             EmailConfirmed = true,
@@ -166,8 +166,9 @@ namespace DocTruyen.DataAccess.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "masterchienboy@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHzkqevVUdNGmjwc3mGobvDj8lQTNXWY/QB/RamglVH7yY8SvYWLE/Yt2t2giFwoNA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIDXZO5ooipDUUm7PUg/vsKygBT607TGuU0K7yE03P82DLH4yTsPvPrA5DjsFwhSxQ==",
                             PhoneNumberConfirmed = false,
+                            ProfileImgURL = "https://i.imgur.com/stD0Q19.jpg",
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "admin"
@@ -176,7 +177,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cee6a158-92a0-4210-afcb-9e678e61203e",
+                            ConcurrencyStamp = "dfed52be-2411-4218-88c7-2b84135c19d0",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user1@gmail.com",
                             EmailConfirmed = true,
@@ -185,8 +186,9 @@ namespace DocTruyen.DataAccess.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user1@gmail.com",
                             NormalizedUserName = "user1",
-                            PasswordHash = "AQAAAAEAACcQAAAAECoNLzOZmNS7GEvbZwXNxwXlAJdWtB2V2V5hZ7yCOtWXFhHlUs/Xr7zasF4CsyyFPQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOTvbnD7uzyzvyDkHbxOXJHe3lDKdLSWCm3tIaXA1anjpcgT87b1nBattUHHRHViOQ==",
                             PhoneNumberConfirmed = false,
+                            ProfileImgURL = "https://i.imgur.com/stD0Q19.jpg",
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "user1"
@@ -195,7 +197,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "83879450-53c6-49d3-8417-a75223543611",
+                            ConcurrencyStamp = "5869745f-ea38-4909-8286-686e7f04bc1d",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user2@gmail.com",
                             EmailConfirmed = true,
@@ -204,12 +206,28 @@ namespace DocTruyen.DataAccess.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user2@gmail.com",
                             NormalizedUserName = "user2",
-                            PasswordHash = "AQAAAAEAACcQAAAAECM/8NyhrTaJdEcfCI7h997sQedhVLDPgC4rOAdy84TUCaLNjZN/GXi23sJVR/sy+Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMwio2hQOrXh6S5V+OR9hKMdYjz6MO12G/Xgt33wdwE4T/W0c3grzFiCtl7UiM4VGw==",
                             PhoneNumberConfirmed = false,
+                            ProfileImgURL = "https://i.imgur.com/xELPaag.jpg",
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "user2"
                         });
+                });
+
+            modelBuilder.Entity("DocTruyen.DataAccess.Models.AppUseRole", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("DocTruyen.DataAccess.Models.Author", b =>
@@ -332,7 +350,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 1,
                             ContentPath = "Đây là nội dung chương 1",
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5802),
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5047),
                             Index = 1,
                             NovelId = 1,
                             PublisherId = 2,
@@ -342,7 +360,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 2,
                             ContentPath = "Đây là nội dung chương 2",
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5805),
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5050),
                             Index = 2,
                             NovelId = 1,
                             PublisherId = 2,
@@ -352,7 +370,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 3,
                             ContentPath = "Đây là nội dung chương 3",
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5806),
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5052),
                             Index = 3,
                             NovelId = 1,
                             PublisherId = 2,
@@ -362,7 +380,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 4,
                             ContentPath = "Đây là nội dung chương 1 truyện Già Thiên",
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5808),
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5053),
                             Index = 1,
                             NovelId = 2,
                             PublisherId = 3,
@@ -378,10 +396,16 @@ namespace DocTruyen.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("CommentId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("NovelId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ParrentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -391,6 +415,8 @@ namespace DocTruyen.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
 
                     b.HasIndex("NovelId");
 
@@ -402,7 +428,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5830),
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5074),
                             NovelId = 1,
                             Text = "Truyện rất hay",
                             UserId = 2
@@ -410,7 +436,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5834),
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5077),
                             NovelId = 1,
                             Text = "Truyện rất hay",
                             UserId = 3
@@ -418,9 +444,36 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5835),
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5078),
                             NovelId = 2,
                             Text = "Truyện như lone",
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5080),
+                            NovelId = 1,
+                            ParrentId = 1,
+                            Text = "Đồng quan điểm",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5081),
+                            NovelId = 1,
+                            ParrentId = 1,
+                            Text = "Bạc quan điểm",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5083),
+                            NovelId = 1,
+                            ParrentId = 3,
+                            Text = "Vô học",
                             UserId = 3
                         });
                 });
@@ -507,7 +560,7 @@ namespace DocTruyen.DataAccess.Migrations
                             Id = 1,
                             AuthorId = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5760),
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5013),
                             Description = "- Từ Địa Cầu xuyên việt tới Dị giới đã thấy nhiều, nhưng Diệp Mặc của chúng ta lại từ Dị giới xuyên tới Địa Cầu.Điều này còn chưa phải là buồn bực nhất, để cho Diệp Mặc phát điên chính là cậu nhỏ của hắn bị liệt.",
                             Name = "Thiếu gia bị bỏ rơi",
                             PublisherId = 2,
@@ -520,68 +573,13 @@ namespace DocTruyen.DataAccess.Migrations
                             Id = 2,
                             AuthorId = 2,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5771),
+                            CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5023),
                             Description = "Trong vũ trụ bao la, một mảnh tinh hệ sinh diệt, cũng bất quá là sát na pha tạp lưu quang.Ngắm nhìn bầu trời, luôn có loại thương cảm kết cục đã nhất định,trăm ngàn năm sau ngươi ta ở đâu ? Gia quốc, ánh lửa văn minh,Địa Cầu, đều chẳng qua là trong thâm không một hạt bụi.",
                             Name = "Già Thiên",
                             PublisherId = 3,
                             Rating = 4.5,
                             Status = 2,
                             TotalChapter = 0
-                        });
-                });
-
-            modelBuilder.Entity("DocTruyen.DataAccess.Models.Reply", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CommentId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Replies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CommentId = 1,
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5870),
-                            Text = "Đồng quan điểm",
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CommentId = 1,
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5872),
-                            Text = "Bạc quan điểm",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CommentId = 3,
-                            CreatedDate = new DateTime(2022, 5, 27, 14, 55, 3, 11, DateTimeKind.Local).AddTicks(5874),
-                            Text = "Truyện như lone",
-                            UserId = 3
                         });
                 });
 
@@ -714,21 +712,6 @@ namespace DocTruyen.DataAccess.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.Property<int>("UserId")
@@ -746,6 +729,25 @@ namespace DocTruyen.DataAccess.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("DocTruyen.DataAccess.Models.AppUseRole", b =>
+                {
+                    b.HasOne("DocTruyen.DataAccess.Models.AppRole", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DocTruyen.DataAccess.Models.AppUser", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DocTruyen.DataAccess.Models.Chapter", b =>
@@ -769,6 +771,10 @@ namespace DocTruyen.DataAccess.Migrations
 
             modelBuilder.Entity("DocTruyen.DataAccess.Models.Comment", b =>
                 {
+                    b.HasOne("DocTruyen.DataAccess.Models.Comment", null)
+                        .WithMany("Replies")
+                        .HasForeignKey("CommentId");
+
                     b.HasOne("DocTruyen.DataAccess.Models.Novel", "Novel")
                         .WithMany("Comments")
                         .HasForeignKey("NovelId")
@@ -820,25 +826,6 @@ namespace DocTruyen.DataAccess.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Publisher");
-                });
-
-            modelBuilder.Entity("DocTruyen.DataAccess.Models.Reply", b =>
-                {
-                    b.HasOne("DocTruyen.DataAccess.Models.Comment", "Comment")
-                        .WithMany("Replies")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("DocTruyen.DataAccess.Models.AppUser", "User")
-                        .WithMany("Replies")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Comment");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DocTruyen.DataAccess.Models.UserReadingLog", b =>
@@ -898,21 +885,6 @@ namespace DocTruyen.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.HasOne("DocTruyen.DataAccess.Models.AppRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DocTruyen.DataAccess.Models.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.HasOne("DocTruyen.DataAccess.Models.AppUser", null)
@@ -920,6 +892,11 @@ namespace DocTruyen.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DocTruyen.DataAccess.Models.AppRole", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("DocTruyen.DataAccess.Models.AppUser", b =>
@@ -930,9 +907,9 @@ namespace DocTruyen.DataAccess.Migrations
 
                     b.Navigation("Novels");
 
-                    b.Navigation("Replies");
-
                     b.Navigation("UserReadingLogs");
+
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("DocTruyen.DataAccess.Models.Author", b =>

@@ -23,7 +23,8 @@ namespace DocTruyen.DataAccess.Extensions
                     SecurityStamp = string.Empty,
                     FirstName = "Chien",
                     LastName = "Hoang Van",
-                    Dob = new DateTime(2020, 01, 31)
+                    Dob = new DateTime(2020, 01, 31),
+                    ProfileImgURL = "https://i.imgur.com/stD0Q19.jpg"
                 },
                 new AppUser
                 {
@@ -37,7 +38,8 @@ namespace DocTruyen.DataAccess.Extensions
                     SecurityStamp = string.Empty,
                     FirstName = "Chien",
                     LastName = "Hoang Van",
-                    Dob = new DateTime(2020, 01, 31)
+                    Dob = new DateTime(2020, 01, 31),
+                    ProfileImgURL = "https://i.imgur.com/stD0Q19.jpg"
                 },
                  new AppUser
                  {
@@ -51,7 +53,8 @@ namespace DocTruyen.DataAccess.Extensions
                      SecurityStamp = string.Empty,
                      FirstName = "Chien",
                      LastName = "Hoang Van",
-                     Dob = new DateTime(2020, 01, 31)
+                     Dob = new DateTime(2020, 01, 31),
+                     ProfileImgURL = "https://i.imgur.com/xELPaag.jpg"
                  });
         }
     }

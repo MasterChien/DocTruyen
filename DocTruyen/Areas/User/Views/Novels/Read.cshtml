@@ -1,0 +1,59 @@
+﻿@using DocTruyen.Service.DTOs.Chapter
+@model ChapterViewDTO
+
+<div class="bg-light rounded-3 mt-5">
+    <div class="row mt-3 cmt">
+        <div class="row mt-3">
+            @{
+                var nextClass = "active";
+                var preClass = "active";
+                if (Model.PreviousChapterId == 0) preClass = "disabled";
+                if (Model.NextChapterId == 0) nextClass = "disabled";
+            }
+            <div class="col-md-4 d-flex justify-content-center">
+                <a class="btn btn-primary @preClass" asp-action="Read" asp-route-id="@Model.PreviousChapterId">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Trang trước
+                </a>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4 d-flex justify-content-center">
+                <a class="btn btn-primary @nextClass" asp-action="Read" asp-route-id="@Model.NextChapterId">
+                    Trang sau
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <h3 class="text-center">
+                Chương @Model.Index: @Model.Title
+            </h3>
+            <div class="col-md-12 mt-3 text-center">
+                @Model.ContentPath
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4 d-flex justify-content-center">
+                <a class="btn btn-primary @preClass" asp-action="Read" asp-route-id="@Model.PreviousChapterId">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Trang trước
+                </a>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4 d-flex justify-content-center">
+                <a class="btn btn-primary @nextClass" asp-action="Read" asp-route-id="@Model.NextChapterId">
+                    Trang sau
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <h4 class="mt-5">Bình luận</h4>
+    <div class="row pt-3">
+        @await Component.InvokeAsync("ListComment",new {novelId = @Model.NovelId})
+    </div>
+</div>

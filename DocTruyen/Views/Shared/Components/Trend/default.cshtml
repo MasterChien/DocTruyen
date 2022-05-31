@@ -1,0 +1,39 @@
+﻿@using DocTruyen.Service.DTOs.Home
+@model List<TrendDTO>
+
+
+<h3 class="text-start mt-5">Truyện Xem Nhiều</h3><hr />
+
+<div id="cards_landscape_wrap-2">
+    <div class="container">
+        <div class="row">
+            @foreach (var dto in Model)
+            {
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <a asp-action="Details" asp-controller="Novels" asp-route-id="@dto.NovelId">
+                    <div class="card-flyer">
+                        <div class="text-box">
+                            <div class="image-box">
+                                <img src="@dto.ImagePath" alt="@dto.NovelName" />
+                            </div>
+                            <div class="text-container">
+                                <h6>@dto.NovelName</h6>
+                               <div class="row">
+                                   <span>Tác Giả: @dto.AuthorName</span>
+                               </div>
+                               <div class="row">
+                                   <span>Số chương: @dto.TotalChapters</span>
+                               </div>
+                               <div class="row">
+                                   <span>Thể loại: @dto.Category</span>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+

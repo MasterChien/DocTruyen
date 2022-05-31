@@ -28,7 +28,7 @@ namespace DocTruyen.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int page, string keyWord)
         {
             const int pageSize = 5;
-            page = page < 1?1:page;
+            page = page < 1 ? 1 : page;
             keyWord = "dong";
             if (!string.IsNullOrEmpty(keyWord))
             {
@@ -39,7 +39,7 @@ namespace DocTruyen.Areas.Admin.Controllers
                 return View(pagedModel);
             }
 
-            var pagedAuthors = await _unitOfWork.Authors.GetPagedListAsync(null, page, 1);
+            var pagedAuthors = await _unitOfWork.Authors.GetPagedListAsync(null, null, page, 1);
             IEnumerable<AuthorViewModel> dto = _mapper.Map<IEnumerable<AuthorViewModel>>(pagedAuthors);
             IPagedList<AuthorViewModel> pagedDto = new StaticPagedList<AuthorViewModel>(dto, pagedAuthors.GetMetaData());
 

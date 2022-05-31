@@ -1,16 +1,18 @@
 ﻿using DocTruyen.DataAccess.Configurations;
 using DocTruyen.DataAccess.Extensions;
 using DocTruyen.DataAccess.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace DocTruyen.DataAccess.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, int>
+    public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, int
+        , IdentityUserClaim<int>, AppUseRole
+        , IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-      
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -20,9 +22,10 @@ namespace DocTruyen.DataAccess.Data
             modelBuilder.ApplyConfiguration(new NovelConfiguration());
             modelBuilder.ApplyConfiguration(new ChapterConfiguration());
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
-            modelBuilder.ApplyConfiguration(new ReplyConfiguration());
             modelBuilder.ApplyConfiguration(new ImageConfiguration());
             modelBuilder.ApplyConfiguration(new UserReadingLogConfiguration());
+            modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
 
             //Seed data
             modelBuilder.SeedAuthors();
@@ -32,7 +35,6 @@ namespace DocTruyen.DataAccess.Data
             modelBuilder.SeedNovels();
             modelBuilder.SeedChapters();
             modelBuilder.SeedComments();
-            modelBuilder.SeedReplies();
         }
 
         public DbSet<Author> Authors { get; set; }
@@ -41,9 +43,6 @@ namespace DocTruyen.DataAccess.Data
         public DbSet<Chapter> Chapters { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Novel> Novels { get; set; }
-        public DbSet<Reply> Replies { get; set; }
-        public DbSet<AppUser> AppUsers { get; set; }
-        public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<UserReadingLog> UserReadingLogs { get; set; }
         public DbSet<ViewCount> ViewCounts { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using DocTruyen.Service.DTOs.Novel;
+﻿using DocTruyen.Service.DTOs.Novels;
 using Microsoft.AspNetCore.Http;
 
 namespace DocTruyen.Service.DTOs.Image

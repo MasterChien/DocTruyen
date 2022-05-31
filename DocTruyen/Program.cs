@@ -34,12 +34,15 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-app.MapDefaultControllerRoute();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapAreaControllerRoute(
         name: "User",
         areaName:"User",
         pattern: "{area=User}/{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapAreaControllerRoute(
+       name: "Admin",
+       areaName: "Admin",
+       pattern: "{area=Admin}/{controller=AdminHome}/{action=Index}/{id?}");
 });
 app.Run();

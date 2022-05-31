@@ -26,7 +26,7 @@ namespace DocTruyen.Areas.Admin.Controllers
             const int pageSize = 5;
             var pageNumber = page ?? 1;
 
-            var categories = await _unitOfWork.Categories.GetPagedListAsync(null,pageNumber, pageSize);
+            var categories = await _unitOfWork.Categories.GetPagedListAsync(null, null, pageNumber, pageSize);
             IEnumerable<CategoryDTO> dto = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
             IPagedList<CategoryDTO> pagedDto = new StaticPagedList<CategoryDTO>(dto, categories.GetMetaData());
             return View(pagedDto);

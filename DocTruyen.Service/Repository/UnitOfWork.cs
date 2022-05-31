@@ -33,8 +33,6 @@ namespace DocTruyen.Service.Repository
 
         public IRepository<Novel> Novels => new Repository<Novel>(_context);
 
-        public IRepository<Reply> Replies => new Repository<Reply>(_context);
-
         public IRepository<UserReadingLog> UserReadingLogs => new Repository<UserReadingLog>(_context);
 
         public IRepository<ViewCount> ViewCounts => new Repository<ViewCount>(_context);

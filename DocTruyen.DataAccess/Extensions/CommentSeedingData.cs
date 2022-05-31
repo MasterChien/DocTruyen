@@ -32,6 +32,33 @@ namespace DocTruyen.DataAccess.Extensions
                     Text = "Truyện như lone",
                     UserId = 3,
                     NovelId = 2
+                },
+                new Comment
+                {
+                    Id = 4,
+                    ParrentId = 1,
+                    CreatedDate = DateTime.Now,
+                    Text = "Đồng quan điểm",
+                    UserId = 2,
+                    NovelId = 1
+                },
+                new Comment
+                {
+                    Id = 5,
+                    ParrentId = 1,
+                    CreatedDate = DateTime.Now,
+                    Text = "Bạc quan điểm",
+                    UserId = 2,
+                    NovelId = 1
+                },
+                new Comment
+                {
+                    Id = 6,
+                    ParrentId = 3,
+                    CreatedDate = DateTime.Now,
+                    Text = "Vô học",
+                    UserId = 3,
+                    NovelId = 1
                 });
         }
     }

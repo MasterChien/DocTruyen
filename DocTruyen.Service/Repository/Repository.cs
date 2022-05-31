@@ -3,7 +3,6 @@ using DocTruyen.Service.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using X.PagedList;
-//using X.PagedList;
 
 namespace DocTruyen.Service.Repository
 {
@@ -64,8 +63,30 @@ namespace DocTruyen.Service.Repository
             }
             return await query.AsNoTracking().ToListAsync();
         }
+
+        public async Task<IEnumerable<T>> GetTopAsync(int top = 1, Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includes = null)
+        {
+            IQueryable<T> query = _db;
+            if (expression != null)
+            {
+                query = query.Where(expression);
+            }
+            if (includes != null)
+            {
+                foreach (var includeProperty in includes)
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            return await query.AsNoTracking().Take(top).ToListAsync();
+        }
         #endregion
-   
+
         #region Update
         public void Update(T entity)
         {
@@ -87,13 +108,20 @@ namespace DocTruyen.Service.Repository
         #endregion
 
         #region Paging
-        public async Task<IPagedList<T>> GetPagedListAsync(Expression<Func<T, bool>> expression = null, int pageNumber = 1, int pageSize = 5, List<string> includes = null)
+        public async Task<IPagedList<T>> GetPagedListAsync(Expression<Func<T, bool>> expression = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            int pageNumber = 1, int pageSize = 5,
+            List<string> includes = null)
         {
             IQueryable<T> query = _db;
 
             if (expression != null)
             {
                 query = query.Where(expression);
+            }
+            if (orderBy != null)
+            {
+                query = orderBy(query);
             }
             if (includes != null)
             {
@@ -103,7 +131,8 @@ namespace DocTruyen.Service.Repository
                 }
             }
             return await query.ToPagedListAsync(pageNumber, pageSize);
-        }  
+        }
         #endregion
+
     }
 }

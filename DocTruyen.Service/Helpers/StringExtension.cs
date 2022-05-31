@@ -29,11 +29,25 @@
             }
             return str;
         }
-        public static string GetFiftyWord(this string str)
+        public static string GetTwentyWords(this string str)
         {
             str.Trim();
-            int i = str.IndexOf(" ", 50);
-            return i < 50 ? str : str.Substring(0, i);
+            if (string.IsNullOrEmpty(str)) return "Chưa cập nhật";
+
+            int wordCount = str.Split(' ').Length;
+            if (wordCount <= 20) return str;
+
+            int spaceCount = 0;
+            string result = "";
+            var a = str.ToArray();
+            for (int i = 0; i < a.Length; i++)
+                if (a[i] == ' ')
+                {
+                    spaceCount++;
+                    if (spaceCount == 20)
+                        result = str.Substring(0, i);
+                }
+            return result;
         }
     }
 }

@@ -167,7 +167,16 @@ input[type=text] {
         }
 /*---------end Card------------*/
 
-/*--------------Footer---------*/
+/*--------------New Update---------*/
+.novel-link {
+    text-decoration: none;
+    color: #455863;
+}
+
+    .novel-link:hover {
+        color: #2784ba;
+    }
+/*--------------End New Update---------*/
 /*footer{
     position: absolute;
 }*/

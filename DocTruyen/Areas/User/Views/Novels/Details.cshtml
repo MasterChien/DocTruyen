@@ -1,0 +1,48 @@
+﻿@using DocTruyen.Service.DTOs.Novels
+@model NovelDetailsDTO
+
+<div class="d-flex justify-content-center pt-5">
+    <div class="row w-75">
+        <div class="col-md-5">
+            <img src="@Model.ImgUrl" />
+        </div>
+        <div class="col-md-7 justify-content-center">
+            <h3 class="">@Model.Name</h3><br />
+            <div class="">Thể loại: @Model.Categoty</div><br />
+            <div class="">Trạng thái: @Model.Status.ToString()</div><br />
+            <div class="">Đánh giá: @Model.Rating</div><br />
+            <div class="">Tác giả: @Model.AuthorName</div><br />
+            <a class="btn btn-primary" asp-action="Read" asp-route-id="@Model.Chapters.FirstOrDefault().Id">Đọc truyện</a>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-5">
+    <div class="">
+        <ul class="nav bg-dark">
+            <li class="nav-item">
+                <a class="nav-link link-secondary" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" href="#">Giới thiệu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-secondary" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" href="#">Danh Sách chương</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-secondary active" id="album-tab" data-bs-toggle="tab" data-bs-target="#album" href="#">Bình Luận</a>
+            </li>
+        </ul>
+
+        <!-- tab panel content -->
+        <div class="tab-content" id="tabContent">
+            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <p>@Model.Desciption</p>
+            </div>
+            <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
+                @await Component.InvokeAsync("ListChapter",new {novelId = @Model.Id})
+            </div>
+            <div class="tab-pane fade" id="album" role="tabpanel" aria-labelledby="album-tab">
+                 @await Component.InvokeAsync("ListComment",new {novelId = @Model.Id})
+            </div>
+        </div>
+    </div>
+</div>
+

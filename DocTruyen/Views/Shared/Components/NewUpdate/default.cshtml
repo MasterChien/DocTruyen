@@ -1,0 +1,16 @@
+﻿@using DocTruyen.Service.DTOs.Chapter
+@model List<NewUpdateChapterDTO>
+<h3 class="text-start mt-5">Mới cập nhật</h3>
+<hr />
+<div class="row mt-3">
+    @foreach (var chapter in Model)
+    {
+        <a class="row mt-2 novel-link" action="Details" asp-controller="Novels" asp-route-id="@chapter.Novel.Id">
+            <div class="col-md-2">@chapter.Novel.Category.Name</div>
+            <div class="col-md-3">@chapter.Novel.Name</div>
+            <div class="col-md-3">@chapter.Title</div>
+            <div class="col-md-2">@chapter.Novel.Author.Name</div>
+            <div class="col-md-2">@chapter.CreateTime</div>
+        </a>
+    }
+</div>
