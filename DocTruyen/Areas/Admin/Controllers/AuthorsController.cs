@@ -5,6 +5,7 @@ using X.PagedList;
 using DocTruyen.DataAccess.Models;
 using DocTruyen.Service.DTOs.Author;
 using Microsoft.AspNetCore.Authorization;
+using DocTruyen.Service.Helpers;
 
 namespace DocTruyen.Areas.Admin.Controllers
 {
@@ -28,10 +29,11 @@ namespace DocTruyen.Areas.Admin.Controllers
         {
             const int pageSize = 5;
             page = page < 1?1:page;
-            
+            keyWord = "dong";
             if (!string.IsNullOrEmpty(keyWord))
             {
-                var authors = await _unitOfWork.Authors.GetAllAsync(a => a.Name.Contains(keyWord));
+                var allAuthors = await _unitOfWork.Authors.GetAllAsync();
+                var authors = allAuthors.Where(a => a.Name.RemoveVietnameseSign().ToLower().Contains(keyWord.RemoveVietnameseSign().ToLower()));
                 var viewmodel = _mapper.Map<IEnumerable<AuthorViewModel>>(authors);
                 IPagedList<AuthorViewModel> pagedModel = new StaticPagedList<AuthorViewModel>(viewmodel, page, pageSize, viewmodel.Count());
                 return View(pagedModel);

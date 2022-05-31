@@ -38,6 +38,16 @@ namespace DocTruyen.Service.Repository
         public IRepository<UserReadingLog> UserReadingLogs => new Repository<UserReadingLog>(_context);
 
         public IRepository<ViewCount> ViewCounts => new Repository<ViewCount>(_context);
+
+        //public string RemoveSignForVietnameseString(string str)
+        //{
+        //    for (int i = 1; i < VietnameseSigns.Length; i++)
+        //    {
+        //        for (int j = 0; j < VietnameseSigns[i].Length; j++)
+        //            str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
+        //    }
+        //    return str;
+        //}
         #endregion
 
         #region Methods

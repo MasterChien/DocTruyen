@@ -16,5 +16,6 @@ namespace DocTruyen.Service.IRepository
         IRepository<UserReadingLog> UserReadingLogs { get; }
         IRepository<ViewCount> ViewCounts { get; }
         Task SaveAsync();
+        //string RemoveSignForVietnameseString(string str);
     }
 }
