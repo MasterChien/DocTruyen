@@ -1,13 +1,13 @@
 ﻿@{
     ViewData["Title"] = "List Categories";
 }
-@using DocTruyen.Service.DTOs.Category
+@using DocTruyen.Service.VMs.Category
 @using X.PagedList
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Web.Common
 
 
-@model IPagedList<CategoryDTO>
+@model IPagedList<CategoryVM>
 
 <div class="container bg-light rounded-3">
     <div class="row pb-3">
@@ -44,7 +44,7 @@
                         <td class="col-md-4">@category.Name</td>
                         <td class="col-md-5">@category.Description</td>
                         <td class="col-md-3">
-                            <a class="btn btn-outline-primary" asp-action="Update" asp-route-id="@category.Id" asp-route-categoryDTO="@category" style="margin-right:5px">
+                            <a class="btn btn-outline-primary" asp-action="Update" asp-route-id="@category.Id" asp-route-categoryVM="@category" style="margin-right:5px">
                                 <i class="bi bi-pencil-square"></i>
                                 Sửa 
                             </a>

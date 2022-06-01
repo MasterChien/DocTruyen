@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using DocTruyen.Service.DTOs.Comment;
-using DocTruyen.Service.DTOs.Reply;
-using DocTruyen.Service.DTOs.User;
+using DocTruyen.Service.VMs.Comment;
+using DocTruyen.Service.VMs.Reply;
+using DocTruyen.Service.VMs.User;
 using DocTruyen.Service.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,31 +29,31 @@ namespace DocTruyen.Areas.User.Controllers.ViewComponents
                              where cmt.ParrentId != null
                              select cmt).ToList();
 
-            var commentsViews = new List<CommentViewDTO>();
+            var commentsViews = new List<CommentViewVM>();
 
             foreach (var cmt in cmtParrents)
             {
-                var cmtView = new CommentViewDTO
+                var cmtView = new CommentViewVM
                 {
                     Id = cmt.Id,
                     Text = cmt.Text,
-                    User = _mapper.Map<UserDTO>(cmt.User),
+                    User = _mapper.Map<UserVM>(cmt.User),
                     CreatedDate = cmt.CreatedDate
                 };
 
                 if (cmtChilds != null)
                 {
-                    var replies = new List<ReplyViewDTO>();
+                    var replies = new List<ReplyViewVM>();
                     foreach (var child in cmtChilds)
                     {
                         if (child.ParrentId == cmt.Id)
                         {
-                            var reply = new ReplyViewDTO
+                            var reply = new ReplyViewVM
                             {
                                 Id = child.Id,
                                 Text = child.Text,
                                 ParrentId = child.ParrentId,
-                                User = _mapper.Map<UserDTO>(child.User),
+                                User = _mapper.Map<UserVM>(child.User),
                                 CreatedDate = child.CreatedDate
                             };
                             if (reply != null)

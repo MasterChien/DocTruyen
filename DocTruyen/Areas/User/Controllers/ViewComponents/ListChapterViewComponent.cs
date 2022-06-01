@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DocTruyen.Service.DTOs.Chapter;
+using DocTruyen.Service.VMs.Chapter;
 using DocTruyen.Service.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +20,7 @@ namespace DocTruyen.Areas.User.Controllers.ViewComponents
             var chapters = await _unitOfWork.Chapters
                 .GetAllAsync(c => c.NovelId == novelId,
                 c => c.OrderBy(o => o.Index));
-            var listChapter = _mapper.Map<IEnumerable<ChapterViewDTO>>(chapters);
+            var listChapter = _mapper.Map<IEnumerable<ChapterViewVM>>(chapters);
 
             return View(listChapter);
         }

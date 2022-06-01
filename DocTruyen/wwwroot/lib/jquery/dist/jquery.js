@@ -5794,7 +5794,7 @@ jQuery.each( {
 	altKey: true,
 	bubbles: true,
 	cancelable: true,
-	changedTouches: true,
+	changeVMuches: true,
 	ctrlKey: true,
 	detail: true,
 	eventPhase: true,
@@ -6380,8 +6380,8 @@ jQuery.fn.extend( {
 } );
 
 jQuery.each( {
-	appendTo: "append",
-	prependTo: "prepend",
+	appenVM: "append",
+	prepenVM: "prepend",
 	insertBefore: "before",
 	insertAfter: "after",
 	replaceAll: "replaceWith"
@@ -9036,7 +9036,7 @@ var
 	originAnchor.href = location.href;
 
 // Base "constructor" for jQuery.ajaxPrefilter and jQuery.ajaxTransport
-function addToPrefiltersOrTransports( structure ) {
+function adVMPrefiltersOrTransports( structure ) {
 
 	// dataTypeExpression is optional and defaults to "*"
 	return function( dataTypeExpression, func ) {
@@ -9363,8 +9363,8 @@ jQuery.extend( {
 			ajaxExtend( jQuery.ajaxSettings, target );
 	},
 
-	ajaxPrefilter: addToPrefiltersOrTransports( prefilters ),
-	ajaxTransport: addToPrefiltersOrTransports( transports ),
+	ajaxPrefilter: adVMPrefiltersOrTransports( prefilters ),
+	ajaxTransport: adVMPrefiltersOrTransports( transports ),
 
 	// Main method
 	ajax: function( url, options ) {

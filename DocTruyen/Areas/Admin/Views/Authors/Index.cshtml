@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Danh sách tác giả";
 }
-@using DocTruyen.Service.DTOs.Author
+@using DocTruyen.Service.VMs.Author
 @using X.PagedList
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Web.Common
@@ -12,7 +12,7 @@
     <div class="row pb-3">
         <h3 class="text-center">Danh Sách Tác Giả</h3>
         <div class="col-md-4">
-            <form class="d-inline-flex" asp-action="Index">
+            <form method="post" class="d-inline-flex" asp-action="Index">
                 <input class="form-control" type="text" style="margin-right:5px" placeholder="Tìm kiếm">
                 <button class="btn btn-outline-primary" type="submit">Tìm Kiếm</button>
             </form>

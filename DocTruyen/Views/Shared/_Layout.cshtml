@@ -1,10 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<AppUser> signInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DocTruyen</title>
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />*@
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/NovelDetails.css" />
     <link rel="stylesheet" href="~/css/Zephyr.css" />
@@ -23,7 +27,7 @@
                     </div>
                     <div class="col-md-1 align-items-start ">
                         <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Thể loại</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Another action</a>
@@ -42,12 +46,34 @@
 
                     <div class="col-md-2">
                     </div>
-                    <div class="col-md-1 align-items-end">
-                        <a class="nav-link" href="#">Đăng nhập</a>
-                    </div>
-                    <div class="col-md-1 align-items-end">
-                        <a class="nav-link" href="#">Đăng ký</a>
-                    </div>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <div class="col-md-1 align-items-end ">
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-divider"></div>
+                                    <form method="post" class="dropdown-item">
+                                        <button type="submit" class="btn btn-outline-primary"
+                                        asp-area="Identity" asp-action="Logout" 
+                                        asp-controller="Accounts">Đăng xuất</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-1 align-items-end">
+                            <a class="nav-link"  asp-area="Identity" asp-action="Login" asp-controller="Accounts">Đăng nhập</a>
+                        </div>
+                        <div class="col-md-1 align-items-end">
+                            <a class="nav-link" asp-area="Identity" asp-action="Register" asp-controller="Accounts">Đăng ký</a>
+                        </div>
+                    }
                 </div>
             </div>
         </nav>
@@ -60,9 +86,9 @@
 
     <div class="container mt-5">
         <footer class="border-top footer text-muted mt-5 text-center">
-            
-                &copy; 2022 - DocTruyen
-            
+
+            &copy; 2022 - DocTruyen
+
         </footer>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

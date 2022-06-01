@@ -2,7 +2,7 @@
 using DocTruyen.DataAccess.Data;
 using DocTruyen.DataAccess.Models;
 using DocTruyen.Service.IRepository;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace DocTruyen.Service.Repository
 {
@@ -10,9 +10,15 @@ namespace DocTruyen.Service.Repository
     {
         #region Constructor
         private readonly ApplicationDbContext _context;
-        public UnitOfWork(ApplicationDbContext context)
+        private readonly RoleManager<AppRole> _roleManager;
+        private readonly UserManager<AppUser> _userManager;
+        public UnitOfWork(ApplicationDbContext context, 
+            RoleManager<AppRole> roleManager,
+            UserManager<AppUser> userManager)
         {
             _context = context;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
         #endregion
 
@@ -37,15 +43,9 @@ namespace DocTruyen.Service.Repository
 
         public IRepository<ViewCount> ViewCounts => new Repository<ViewCount>(_context);
 
-        //public string RemoveSignForVietnameseString(string str)
-        //{
-        //    for (int i = 1; i < VietnameseSigns.Length; i++)
-        //    {
-        //        for (int j = 0; j < VietnameseSigns[i].Length; j++)
-        //            str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
-        //    }
-        //    return str;
-        //}
+        public RoleManager<AppRole> RoleManagers => _roleManager;
+
+        public UserManager<AppUser> UserManagers => _userManager;
         #endregion
 
         #region Methods

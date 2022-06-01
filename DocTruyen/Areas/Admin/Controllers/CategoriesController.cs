@@ -1,7 +1,7 @@
 ﻿using DocTruyen.Service.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using DocTruyen.Service.DTOs.Category;
+using DocTruyen.Service.VMs.Category;
 using X.PagedList;
 using DocTruyen.DataAccess.Models;
 
@@ -27,9 +27,9 @@ namespace DocTruyen.Areas.Admin.Controllers
             var pageNumber = page ?? 1;
 
             var categories = await _unitOfWork.Categories.GetPagedListAsync(null, null, pageNumber, pageSize);
-            IEnumerable<CategoryDTO> dto = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
-            IPagedList<CategoryDTO> pagedDto = new StaticPagedList<CategoryDTO>(dto, categories.GetMetaData());
-            return View(pagedDto);
+            IEnumerable<CategoryVM> VM = _mapper.Map<IEnumerable<CategoryVM>>(categories);
+            IPagedList<CategoryVM> pagedVM = new StaticPagedList<CategoryVM>(VM, categories.GetMetaData());
+            return View(pagedVM);
         }
         #endregion
 
@@ -42,11 +42,11 @@ namespace DocTruyen.Areas.Admin.Controllers
         //Post: Category
         [ActionName("Create")]
         [HttpPost]
-        public async Task<IActionResult> Create(CreateCategoryDTO createCategoryDTO)
+        public async Task<IActionResult> Create(CreateCategoryVM createCategoryVM)
         {
             if (!ModelState.IsValid)
-                return View(createCategoryDTO);
-            var category = _mapper.Map<Category>(createCategoryDTO);
+                return View(createCategoryVM);
+            var category = _mapper.Map<Category>(createCategoryVM);
             await _unitOfWork.Categories.AddAsync(category);
             await _unitOfWork.SaveAsync();
 
@@ -60,19 +60,19 @@ namespace DocTruyen.Areas.Admin.Controllers
         {
             var category = await _unitOfWork.Categories.GetAysnc(c => c.Id == id);
             if (category == null) return View("NotFound");
-            return View(_mapper.Map<CategoryDTO>(category));
+            return View(_mapper.Map<CategoryVM>(category));
         }
 
         //Post:Category/id
         [HttpPost]
-        public async Task<IActionResult> Update(int id, CategoryDTO categoryDTO)
+        public async Task<IActionResult> Update(int id, CategoryVM categoryVM)
         {
-            if (!ModelState.IsValid) return View(categoryDTO);
+            if (!ModelState.IsValid) return View(categoryVM);
 
             var category = await _unitOfWork.Categories.GetAysnc(c => c.Id == id);
             if (category == null) return View("NotFound");
 
-            _mapper.Map(categoryDTO, category);
+            _mapper.Map(categoryVM, category);
             _unitOfWork.Categories.Update(category);
             await _unitOfWork.SaveAsync();
 

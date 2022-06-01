@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DocTruyen.DataAccess.Data;
 using DocTruyen.DataAccess.Models;
-using DocTruyen.Service.DTOs.Category;
+using DocTruyen.Service.VMs.Category;
 using DocTruyen.Service.Helpers;
 using DocTruyen.Service.IRepository;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +35,7 @@ namespace DocTruyen.Service.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<IPagedList<CategoryDTO>> GetCategoriesAsync(RequestParams requestParams = null, List<string> includes = null)
+        public async Task<IPagedList<CategoryVM>> GetCategoriesAsync(RequestParams requestParams = null, List<string> includes = null)
         {
             IQueryable<Category> query = _context.Categories;
 
@@ -47,7 +47,7 @@ namespace DocTruyen.Service.Repository
                 }
             }
             var categories = await query.AsNoTracking().ToPagedListAsync(requestParams.PageNumber, requestParams.PageSize);
-            return _mapper.Map<IPagedList<CategoryDTO>>(categories);
+            return _mapper.Map<IPagedList<CategoryVM>>(categories);
         }
 
         public void Update(Category category)

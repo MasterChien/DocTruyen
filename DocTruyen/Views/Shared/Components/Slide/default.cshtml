@@ -1,5 +1,5 @@
-﻿@using DocTruyen.Service.DTOs.Home
-@model List<SlideDTO>
+﻿@using DocTruyen.Service.VMs.Home
+@model List<SlideVM>
 
 <div class="bg-light">
     <div class="row d-flex justify-content-center mt-5">
@@ -18,16 +18,16 @@
                         var activeClass = "active";
                         int index = 1;
                     }
-                    @foreach (var dto in Model)
+                    @foreach (var VM in Model)
                     {
                         if (index == 1)
                         {
                             <div class="carousel-item @activeClass">
-                                <a asp-controller="Novels" asp-action="Details" asp-route-id="@dto.NovelId">
+                                <a asp-controller="Novels" asp-action="Details" asp-route-id="@VM.NovelId">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="d-block w-100 img-rounded" alt="slide@(index)">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h5>@dto.NovelName</h5>
-                                        <p>@dto.ShortDes</p>
+                                        <h5>@VM.NovelName</h5>
+                                        <p>@VM.ShortDes</p>
                                     </div>
                                 </a>
                             </div>
@@ -35,11 +35,11 @@
                         else
                         {
                             <div class="carousel-item">
-                                <a asp-controller="Novels" asp-action="Details" asp-route-id="@dto.NovelId">
+                                <a asp-controller="Novels" asp-action="Details" asp-route-id="@VM.NovelId">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(16).webp" class="d-block w-100" alt="slide@(index)">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h5>@dto.NovelName</h5>
-                                        <p>@dto.ShortDes</p>
+                                        <h5>@VM.NovelName</h5>
+                                        <p>@VM.ShortDes</p>
                                     </div>
                                 </a>
                             </div>

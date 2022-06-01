@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DocTruyen.Service.DTOs.Author
+namespace DocTruyen.Service.VMs.Author
 {
     public class AuthorViewModel
     {

@@ -1,5 +1,5 @@
-﻿@using DocTruyen.Service.DTOs.Home
-@model List<TrendDTO>
+﻿@using DocTruyen.Service.VMs.Home
+@model List<TrendVM>
 
 
 <h3 class="text-start mt-5">Truyện Xem Nhiều</h3><hr />
@@ -7,25 +7,25 @@
 <div id="cards_landscape_wrap-2">
     <div class="container">
         <div class="row">
-            @foreach (var dto in Model)
+            @foreach (var VM in Model)
             {
                 <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <a asp-action="Details" asp-controller="Novels" asp-route-id="@dto.NovelId">
+                <a asp-action="Details" asp-controller="Novels" asp-route-id="@VM.NovelId">
                     <div class="card-flyer">
                         <div class="text-box">
                             <div class="image-box">
-                                <img src="@dto.ImagePath" alt="@dto.NovelName" />
+                                <img src="@VM.ImagePath" alt="@VM.NovelName" />
                             </div>
                             <div class="text-container">
-                                <h6>@dto.NovelName</h6>
+                                <h6>@VM.NovelName</h6>
                                <div class="row">
-                                   <span>Tác Giả: @dto.AuthorName</span>
+                                   <span>Tác Giả: @VM.AuthorName</span>
                                </div>
                                <div class="row">
-                                   <span>Số chương: @dto.TotalChapters</span>
+                                   <span>Số chương: @VM.TotalChapters</span>
                                </div>
                                <div class="row">
-                                   <span>Thể loại: @dto.Category</span>
+                                   <span>Thể loại: @VM.Category</span>
                                </div>
                             </div>
                         </div>

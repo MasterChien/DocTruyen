@@ -1,4 +1,4 @@
-﻿using DocTruyen.Service.DTOs.Home;
+﻿using DocTruyen.Service.VMs.Home;
 using DocTruyen.Service.Helpers;
 using DocTruyen.Service.IRepository;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +16,10 @@ namespace DocTruyen.Areas.User.Controllers.ViewComponents
         {
             var allNovels = await _unitOfWork.Novels.GetAllAsync(null, null, new List<string> { "Author" });
             var trendNovels = allNovels.Take(10).ToList();
-            List<SlideDTO> trendDTOs = new List<SlideDTO>();
+            List<SlideVM> trendVMs = new List<SlideVM>();
             foreach (var novel in trendNovels)
             {
-                var slideDTO = new SlideDTO
+                var slideVM = new SlideVM
                 {
                     NovelId = novel.Id,
                     NovelName = novel.Name,
@@ -27,12 +27,12 @@ namespace DocTruyen.Areas.User.Controllers.ViewComponents
                     ShortDes = novel.Description.GetTwentyWords() + "..."
                 };
                 if (novel.Author != null)
-                    slideDTO.AuthorName = novel.Author.Name;
+                    slideVM.AuthorName = novel.Author.Name;
                 else
-                    slideDTO.AuthorName = @"Chưa cập nhật";
-                trendDTOs.Add(slideDTO);
+                    slideVM.AuthorName = @"Chưa cập nhật";
+                trendVMs.Add(slideVM);
             }
-            return View(trendDTOs);
+            return View(trendVMs);
         }
     }
 }

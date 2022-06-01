@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using DocTruyen.Service.DTOs.Chapter;
-using DocTruyen.Service.DTOs.Novels;
+using DocTruyen.Service.VMs.Chapter;
+using DocTruyen.Service.VMs.Novels;
 using DocTruyen.Service.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +20,7 @@ namespace DocTruyen.Areas.User.Controllers
         {
             var novel = await _unitOfWork.Novels.GetAysnc(n => n.Id == id, new List<string> { "Chapters" });
             if (novel == null) return View("NotFound");
-            var novelDetaisDTO = new NovelDetailsDTO
+            var novelDetaisVM = new NovelDetailsVM
             {
                 Id = novel.Id,
                 Name = novel.Name,
@@ -30,22 +30,22 @@ namespace DocTruyen.Areas.User.Controllers
             };
             if (novel.Chapters != null)
             {
-                novelDetaisDTO.Chapters = _mapper.Map<List<ChapterDTO>>(novel.Chapters);
+                novelDetaisVM.Chapters = _mapper.Map<List<ChapterVM>>(novel.Chapters);
             }
             if (novel.Author != null)
-                novelDetaisDTO.AuthorName = novel.Author.Name;
+                novelDetaisVM.AuthorName = novel.Author.Name;
             else
-                novelDetaisDTO.AuthorName = "Chưa cập nhật";
+                novelDetaisVM.AuthorName = "Chưa cập nhật";
             if (novel.Category != null)
-                novelDetaisDTO.Categoty = novel.Category.Name;
+                novelDetaisVM.Categoty = novel.Category.Name;
             else
-                novelDetaisDTO.Categoty = "Chưa cập nhật";
+                novelDetaisVM.Categoty = "Chưa cập nhật";
             if (novel.Images != null)
-                novelDetaisDTO.ImgUrl = novel.Images.FirstOrDefault().ImagePath;
+                novelDetaisVM.ImgUrl = novel.Images.FirstOrDefault().ImagePath;
             else
 
-                novelDetaisDTO.ImgUrl = "https://static.cdnno.com/poster/toan-chuc-nghe-thuat-gia/300.jpg?1602252394";
-            return View(novelDetaisDTO);
+                novelDetaisVM.ImgUrl = "https://static.cdnno.com/poster/toan-chuc-nghe-thuat-gia/300.jpg?1602252394";
+            return View(novelDetaisVM);
         }
 
         public async Task<IActionResult> Read(int id)
@@ -55,7 +55,7 @@ namespace DocTruyen.Areas.User.Controllers
                 .GetAysnc(c => c.NovelId == chapter.NovelId && c.Index == chapter.Index + 1);
             var previousChapter = await _unitOfWork.Chapters
                 .GetAysnc(c => c.NovelId == chapter.NovelId && c.Index == chapter.Index - 1);
-            var chapterView = _mapper.Map<ChapterViewDTO>(chapter);
+            var chapterView = _mapper.Map<ChapterViewVM>(chapter);
 
             if (nextChapter != null)
                 chapterView.NextChapterId = nextChapter.Id;

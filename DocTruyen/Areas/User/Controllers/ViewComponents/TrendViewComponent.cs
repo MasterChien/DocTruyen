@@ -1,4 +1,4 @@
-﻿using DocTruyen.Service.DTOs.Home;
+﻿using DocTruyen.Service.VMs.Home;
 using DocTruyen.Service.Helpers;
 using DocTruyen.Service.IRepository;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +17,10 @@ namespace DocTruyen.Areas.User.Controllers.ViewComponents
         {
             var allNovels = await _unitOfWork.Novels.GetAllAsync(null, null, new List<string> { "Author", "Images", "Category" });
             var trendNovels = allNovels.Take(10).ToList();
-            List<TrendDTO> trendDTOs = new List<TrendDTO>();
+            List<TrendVM> trendVMs = new List<TrendVM>();
             foreach (var novel in trendNovels)
             {
-                var trendDTO = new TrendDTO
+                var trendVM = new TrendVM
                 {
                     NovelId = novel.Id,
                     NovelName = novel.Name,
@@ -29,20 +29,20 @@ namespace DocTruyen.Areas.User.Controllers.ViewComponents
                 };
                 if (novel.Images.Count > 0)
                 {
-                    trendDTO.ImagePath = novel.Images.FirstOrDefault().ImagePath;
+                    trendVM.ImagePath = novel.Images.FirstOrDefault().ImagePath;
                 }
-                else trendDTO.ImagePath = "https://static.cdnno.com/poster/toan-chuc-nghe-thuat-gia/300.jpg?1602252394";
+                else trendVM.ImagePath = "https://static.cdnno.com/poster/toan-chuc-nghe-thuat-gia/300.jpg?1602252394";
                 if (novel.Category != null)
-                    trendDTO.Category = novel.Category.Name;
+                    trendVM.Category = novel.Category.Name;
                 else
-                    trendDTO.Category = "Chưa cập nhật";
+                    trendVM.Category = "Chưa cập nhật";
                 if (novel.Author != null)
-                    trendDTO.AuthorName = novel.Author.Name;
+                    trendVM.AuthorName = novel.Author.Name;
                 else
-                    trendDTO.AuthorName = "Chưa cập nhật";
-                trendDTOs.Add(trendDTO);
+                    trendVM.AuthorName = "Chưa cập nhật";
+                trendVMs.Add(trendVM);
             }
-            return View(trendDTOs);
+            return View(trendVMs);
         }
     }
 }

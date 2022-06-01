@@ -1,4 +1,5 @@
 ﻿using DocTruyen.DataAccess.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace DocTruyen.Service.IRepository
 {
@@ -14,7 +15,9 @@ namespace DocTruyen.Service.IRepository
         IRepository<Novel> Novels { get; }
         IRepository<UserReadingLog> UserReadingLogs { get; }
         IRepository<ViewCount> ViewCounts { get; }
+        RoleManager<AppRole> RoleManagers { get; }
+        UserManager<AppUser> UserManagers { get; }
+
         Task SaveAsync();
-        //string RemoveSignForVietnameseString(string str);
     }
 }

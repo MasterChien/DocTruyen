@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DocTruyen.DataAccess.Models;
-using DocTruyen.Service.DTOs.Chapter;
+using DocTruyen.Service.VMs.Chapter;
 using DocTruyen.Service.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,14 +39,14 @@ namespace DocTruyen.Areas.User.Controllers.ViewComponents
                         chapter.Novel = novel;
                 }
             }
-            var newUpdateChapterDTO = _mapper.Map<List<NewUpdateChapterDTO>>(newChapters);
-            foreach (var chapter in newUpdateChapterDTO)
+            var newUpdateChapterVM = _mapper.Map<List<NewUpdateChapterVM>>(newChapters);
+            foreach (var chapter in newUpdateChapterVM)
             {
                 chapter.CreateTime = TimeBefore(newChapters
                     .Where(c => c.Id == chapter.Id)
                     .FirstOrDefault().CreatedDate);
             }
-            return View(newUpdateChapterDTO);
+            return View(newUpdateChapterVM);
         }
 
         private string TimeBefore(DateTime then)

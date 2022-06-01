@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using X.PagedList;
 using DocTruyen.DataAccess.Models;
-using DocTruyen.Service.DTOs.Author;
+using DocTruyen.Service.VMs.Author;
 using Microsoft.AspNetCore.Authorization;
 using DocTruyen.Service.Helpers;
 
@@ -40,10 +40,10 @@ namespace DocTruyen.Areas.Admin.Controllers
             }
 
             var pagedAuthors = await _unitOfWork.Authors.GetPagedListAsync(null, null, page, 1);
-            IEnumerable<AuthorViewModel> dto = _mapper.Map<IEnumerable<AuthorViewModel>>(pagedAuthors);
-            IPagedList<AuthorViewModel> pagedDto = new StaticPagedList<AuthorViewModel>(dto, pagedAuthors.GetMetaData());
+            IEnumerable<AuthorViewModel> VM = _mapper.Map<IEnumerable<AuthorViewModel>>(pagedAuthors);
+            IPagedList<AuthorViewModel> pagedVM = new StaticPagedList<AuthorViewModel>(VM, pagedAuthors.GetMetaData());
 
-            return View(pagedDto);
+            return View(pagedVM);
         }
         #endregion
 
@@ -55,21 +55,21 @@ namespace DocTruyen.Areas.Admin.Controllers
         }
         //Post: Author
         [HttpPost]
-        public async Task<IActionResult> Create(CreateAuthorDTO createAuthorDTO)
+        public async Task<IActionResult> Create(CreateAuthorVM createAuthorVM)
         {
             if (!ModelState.IsValid)
-                return View(createAuthorDTO);
+                return View(createAuthorVM);
             Author author = new Author();
-            if (createAuthorDTO.ProfileImgUrl != null)
+            if (createAuthorVM.ProfileImgUrl != null)
             {
-                var result = await _imageService.AddImageAsync(createAuthorDTO.ProfileImgUrl);
+                var result = await _imageService.AddImageAsync(createAuthorVM.ProfileImgUrl);
                 if (result.Error != null) return View("NotFound");
 
                 author.PublicId = result.PublicId;
                 author.ProfileImgUrl = result.SecureUrl.AbsoluteUri;
             }
-            author.Name = createAuthorDTO.Name;
-            author.Description = createAuthorDTO.Description;
+            author.Name = createAuthorVM.Name;
+            author.Description = createAuthorVM.Description;
 
 
             await _unitOfWork.Authors.AddAsync(author);
@@ -85,34 +85,34 @@ namespace DocTruyen.Areas.Admin.Controllers
         {
             var author = await _unitOfWork.Authors.GetAysnc(a => a.Id == id, new List<string> { "Novels" });
             if (author == null) return View("NotFound");
-            var authorDTO = new AuthorDTO
+            var authorVM = new AuthorVM
             {
                 Id = author.Id,
                 Name = author.Name,
                 Description = author.Description
             };
-            return View(authorDTO);
+            return View(authorVM);
         }
 
         //Post:Category/id
         [HttpPost]
-        public async Task<IActionResult> Update(int id, AuthorDTO authorDTO)
+        public async Task<IActionResult> Update(int id, AuthorVM authorVM)
         {
-            if (!ModelState.IsValid) return View(authorDTO);
+            if (!ModelState.IsValid) return View(authorVM);
 
             var author = await _unitOfWork.Authors.GetAysnc(c => c.Id == id, new List<string> { "Novels" });
             if (author == null) return View("NotFound");
 
-            if (authorDTO.ProfileImgUrl != null)
+            if (authorVM.ProfileImgUrl != null)
             {
-                var result = await _imageService.AddImageAsync(authorDTO.ProfileImgUrl);
+                var result = await _imageService.AddImageAsync(authorVM.ProfileImgUrl);
                 if (result.Error != null) return View("NotFound");
                 author.PublicId = result.PublicId;
                 author.ProfileImgUrl = result.SecureUrl.AbsoluteUri;
 
             }
-            author.Name = authorDTO.Name;
-            author.Description = authorDTO.Description;
+            author.Name = authorVM.Name;
+            author.Description = authorVM.Description;
 
             _unitOfWork.Authors.Update(author);
             await _unitOfWork.SaveAsync();
@@ -136,9 +136,9 @@ namespace DocTruyen.Areas.Admin.Controllers
         //    //    return _mapper.Map<AuthorViewModel>(a);
         //    //});
         //    if (page == 0) page = 1;
-        //    IPagedList<AuthorViewModel> pagedDto = new StaticPagedList<AuthorViewModel>(viewmodel, page, 5, viewmodel.Count());
+        //    IPagedList<AuthorViewModel> pagedVM = new StaticPagedList<AuthorViewModel>(viewmodel, page, 5, viewmodel.Count());
 
-        //    return View("Index", pagedDto);
+        //    return View("Index", pagedVM);
         //}
         #endregion
 
