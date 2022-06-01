@@ -1,0 +1,39 @@
+﻿@using DocTruyen.Service.VMs.Home
+@model List<TrendVM>
+
+
+<h3 class="text-start mt-5">Truyện Xem Nhiều</h3><hr />
+
+<div id="cards_landscape_wrap-2">
+    <div class="container">
+        <div class="row">
+            @foreach (var VM in Model)
+            {
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <a asp-action="Details" asp-controller="Novels" asp-route-id="@VM.NovelId">
+                    <div class="card-flyer">
+                        <div class="text-box">
+                            <div class="image-box">
+                                <img src="@VM.ImagePath" alt="@VM.NovelName" />
+                            </div>
+                            <div class="text-container">
+                                <h6>@VM.NovelName</h6>
+                               <div class="row">
+                                   <span>Tác Giả: @VM.AuthorName</span>
+                               </div>
+                               <div class="row">
+                                   <span>Số chương: @VM.TotalChapters</span>
+                               </div>
+                               <div class="row">
+                                   <span>Thể loại: @VM.Category</span>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+

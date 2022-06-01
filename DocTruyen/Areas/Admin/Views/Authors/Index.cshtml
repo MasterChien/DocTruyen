@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Danh sách tác giả";
+}
+@using DocTruyen.Service.VMs.Author
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+
+@model IPagedList<AuthorViewModel>
+
+    <div class="container bg-light rounded-3">
+    <div class="row pb-3">
+        <h3 class="text-center">Danh Sách Tác Giả</h3>
+        <div class="col-md-4">
+            <form method="post" class="d-inline-flex" asp-action="Index">
+                <input class="form-control" type="text" style="margin-right:5px" placeholder="Tìm kiếm">
+                <button class="btn btn-outline-primary" type="submit">Tìm Kiếm</button>
+            </form>
+        </div>
+        <div class="col-md-5">
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <a class="btn btn-outline-primary" asp-action="Create">Thêm tác giả mới</a>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead class="">
+                <tr class="table-active ">
+                    <th class="col-md-3">@Html.DisplayNameFor(model => model.First().ProfileImgUrl)</th>
+                    <th class="col-md-3">@Html.DisplayNameFor(model => model.First().Name)</th>
+                    <th class="col-md-4">@Html.DisplayNameFor(model => model.First().Description)</th>
+                    <th class="col-md-2">Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var author in Model)
+                {
+                    <tr class="">
+                        <td class="col-md-3">
+                            <img class="rounded-circle" src="@author.ProfileImgUrl" alt="@author.Name" style="max-width: 150px" />
+                        </td>
+                        <td class="col-md-3">@author.Name</td>
+                        <td class="col-md-4">@author.Description</td>
+                        <td class="col-md-2">
+                            <a class="btn btn-outline-primary" asp-action="Update" asp-route-id="@author.Id" style="margin-right:5px">
+                                <i class="bi bi-pencil-square"></i>
+                                Sửa 
+                            </a>
+                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@author.Id">
+                                <i class="bi bi-trash"></i>
+                                Xóa 
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pull-right">
+            @Html.PagedListPager((IPagedList)Model,
+            page => Url.Action("Index",
+            new {page}),
+            new PagedListRenderOptions
+            {
+                LiElementClasses = new string[] { "page-item" },
+                PageClasses = new string[] { "page-link" },
+                LinkToPreviousPageFormat = "Trước",
+                LinkToNextPageFormat = "Sau",
+                LinkToFirstPageFormat = "Trang Đầu",
+                LinkToLastPageFormat = "Trang Cuối",
+                Display = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always
+            })
+        </div>
+    </div>
+</div>

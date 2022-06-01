@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace DocTruyen.Controllers
+namespace DocTruyen.Areas.Admin.Controllers
 {
-    public class HomeController : Controller
+    [Area("Admin")]
+    public class AdminHomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<AdminHomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public AdminHomeController(ILogger<AdminHomeController> logger)
         {
             _logger = logger;
         }
