@@ -14,7 +14,7 @@ namespace DocTruyen.Areas.User.Controllers.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var allNovels = await _unitOfWork.Novels.GetAllAsync(null, null, new List<string> { "Author" });
+            var allNovels = await _unitOfWork.Novels.GetAllAsync(null, null, new List<string> { "Author","Images" });
             var trendNovels = allNovels.Take(10).ToList();
             List<SlideVM> trendVMs = new List<SlideVM>();
             foreach (var novel in trendNovels)
@@ -26,6 +26,10 @@ namespace DocTruyen.Areas.User.Controllers.ViewComponents
                     TotalChapters = novel.TotalChapter,
                     ShortDes = novel.Description.GetTwentyWords() + "..."
                 };
+                if (novel.Images.Any()) slideVM.ImagePath = novel.Images
+                        .Where(i => i.ImagePath != null)
+                        .FirstOrDefault().ImagePath;
+                else slideVM.ImagePath = "https://static.cdnno.com/poster/nguoi-tai-than-quy-nhuc-than-vo-han-thoi-dien/300.jpg?1649753583";
                 if (novel.Author != null)
                     slideVM.AuthorName = novel.Author.Name;
                 else

@@ -3,6 +3,14 @@ using DocTruyen.Service.VMs.Chapter;
 using DocTruyen.Service.VMs.Novels;
 using DocTruyen.Service.IRepository;
 using Microsoft.AspNetCore.Mvc;
+using DocTruyen.DataAccess.Models;
+using DocTruyen.DataAccess.Enums;
+using DocTruyen.Service.VMs.Author;
+using DocTruyen.Service.VMs.Category;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using DocTruyen.Service.Helpers;
+using DocTruyen.Service.VMs.Home;
 
 namespace DocTruyen.Areas.User.Controllers
 {
@@ -11,11 +19,14 @@ namespace DocTruyen.Areas.User.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public NovelsController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IImageService _imageService;
+        public NovelsController(IUnitOfWork unitOfWork, IMapper mapper,IImageService imageService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _imageService = imageService;
         }
+
         public async Task<IActionResult> Details(int id)
         {
             var novel = await _unitOfWork.Novels.GetAysnc(n => n.Id == id, new List<string> { "Chapters" });
@@ -48,6 +59,7 @@ namespace DocTruyen.Areas.User.Controllers
             return View(novelDetaisVM);
         }
 
+       
         public async Task<IActionResult> Read(int id)
         {
             var chapter = await _unitOfWork.Chapters.GetAysnc(c => c.Id == id);
@@ -64,7 +76,56 @@ namespace DocTruyen.Areas.User.Controllers
 
             return View(chapterView);
         }
+        
+        public async Task<IActionResult> UploadNovel()
+        {
+            UploadNovelVM novelUpload = new UploadNovelVM();
+            novelUpload.Authors = _mapper.Map<List<AuthorViewModel>>
+                (await _unitOfWork.Authors.GetAllAsync());
 
+            novelUpload.Categories = _mapper.Map<List<CategoryVM>>
+              (await _unitOfWork.Categories.GetAllAsync());
+           
+            return View(novelUpload);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UploadNovel(UploadNovelVM novelUpload)
+        {
+            if (!ModelState.IsValid) return View(novelUpload);
+
+            Novel novel = new Novel
+            {
+                Name = novelUpload.Name,
+                Description = novelUpload.Description,
+                CreatedDate = DateTime.Now,
+                AuthorId = novelUpload.AuthorId,
+                CategoryId = novelUpload.CategoryId,
+                Status = NovelStatus.OnGoing
+            };
+            AppUser appUser = await _unitOfWork.UserManagers.GetUserAsync(User);
+            novel.PublisherId = appUser.Id;
+            
+            await _unitOfWork.Novels.AddAsync(novel);
+            await _unitOfWork.SaveAsync();
+
+            Image image = new Image();
+            if (novelUpload.Image != null)
+            {
+                var result = await _imageService.AddImageAsync(novelUpload.Image);
+                if (result.Error != null)
+                {
+                    ViewBag.ErrorMassage = "Lỗi upload ảnh";
+                    return View("NotFound");
+                }
+                image.PublicId = result.PublicId;
+                image.ImagePath = result.SecureUrl.AbsoluteUri;
+                image.Caption = novelUpload.Name;
+                image.NovelId = novel.Id;
+                await _unitOfWork.Images.AddAsync(image);
+                await _unitOfWork.SaveAsync();
+            }
+            return View(novelUpload);
+        }
         //public async Task<IActionResult> CreateComment(int NovelId)
     }
 }

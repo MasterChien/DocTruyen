@@ -24,7 +24,7 @@
                         {
                             <div class="carousel-item @activeClass">
                                 <a asp-controller="Novels" asp-action="Details" asp-route-id="@VM.NovelId">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="d-block w-100 img-rounded" alt="slide@(index)">
+                                    <img src="@VM.ImagePath" class="d-block w-100 img-rounded" alt="slide@(index)">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>@VM.NovelName</h5>
                                         <p>@VM.ShortDes</p>
@@ -36,7 +36,7 @@
                         {
                             <div class="carousel-item">
                                 <a asp-controller="Novels" asp-action="Details" asp-route-id="@VM.NovelId">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(16).webp" class="d-block w-100" alt="slide@(index)">
+                                    <img src="@VM.ImagePath" class="d-block w-100" alt="slide@(index)">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>@VM.NovelName</h5>
                                         <p>@VM.ShortDes</p>

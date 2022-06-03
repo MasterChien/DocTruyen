@@ -16,9 +16,6 @@ builder.Services.AddControllersWithViews();
 var cloudinarySettings = builder.Configuration.GetSection("CloudinarySettings");
 builder.Services.Configure<CloudinarySettings>(cloudinarySettings);
 
-var imgbbSettings = builder.Configuration.GetSection("ImgbbSettings");
-builder.Services.Configure<ImgbbSettings>(imgbbSettings);
-
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
