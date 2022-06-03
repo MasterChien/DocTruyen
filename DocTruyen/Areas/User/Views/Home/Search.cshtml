@@ -1,0 +1,27 @@
+﻿@using DocTruyen.Service.VMs.Home
+@model List<SlideVM>
+
+<div class="row mt-5">
+    @foreach (var novel in Model)
+    {
+        <div class="row mt-4">
+            <div class="col-md-2" >
+                <img src="@novel.ImagePath"  style="height:150px"/>
+            </div>
+            <div class="col-md-4">
+                <div class="text-container">
+                    <h6>@novel.NovelName</h6>
+                    <div class="row">
+                        <span>Tác Giả: @novel.AuthorName</span>
+                    </div>
+                    <div class="row">
+                        <span>Số chương: @novel.TotalChapters</span>
+                    </div>
+                    <div class="row">
+                        <span>Thể loại: @novel.Category</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

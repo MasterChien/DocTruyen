@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DocTruyen.DataAccess.Models;
+using DocTruyen.Service.Vms.UserRole;
 using DocTruyen.Service.VMs.Author;
 using DocTruyen.Service.VMs.Category;
 using DocTruyen.Service.VMs.Chapter;
@@ -25,9 +26,11 @@ namespace DocTruyen.Service.Helpers
             CreateMap<Comment, CommentVM>().ReverseMap();
             CreateMap<Comment, CreateCommentVM>().ReverseMap();
             CreateMap<AppUser, UserVM>().ReverseMap();
+            CreateMap<AppUser, EditUserVM>().ReverseMap();
             CreateMap<AppRole, RoleVM>().ReverseMap();
             CreateMap<AppRole, EditRoleVM>().ReverseMap();
             CreateMap<AppRole, CreateRoleVM>().ReverseMap();
+            CreateMap<AppUseRole, CreateUserRoleVM>().ReverseMap();
 
         }
 

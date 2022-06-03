@@ -1,4 +1,6 @@
 ﻿@inject SignInManager<AppUser> signInManager
+@inject UserManager<AppUser> userManager
+@inject RoleManager<AppRole> roleManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,8 +41,8 @@
                     </div>
                     <div class="col-md-2">
                     </div>
-                    <form class="col-md-4 ml-auto footer-subscribe p-0 d-flex">
-                        <input type="text" class="form-control" placeholder="Search &hellip;">
+                    <form class="col-md-4 ml-auto footer-subscribe p-0 d-flex" method="post"  asp-action="Search" >
+                        <input type="text" class="form-control" placeholder="Search &hellip;" name="keyWord">
                         <button type="submit" class="btn btn-ountline-rounded"><i class="fa fa-search"></i></button>
                     </form>
 
@@ -52,15 +54,35 @@
                             <div class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <form method="post" class="dropdown-item">
-                                        <button type="submit" class="btn btn-outline-primary"
-                                        asp-area="Identity" asp-action="Logout" 
-                                        asp-controller="Accounts">Đăng xuất</button>
-                                    </form>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                        <a class="dropdown-item" asp-area="Admin" asp-action="Index" asp-controller="AdminHome">Quan ly</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="dropdown-divider"></div>
+                                        <form method="post" class="dropdown-item">
+                                            <button type="submit" class="btn btn-outline-primary"
+                                            asp-area="Identity" asp-action="Logout"
+                                            asp-controller="Accounts">
+                                                Đăng xuất
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                       
+                                        <a class="dropdown-item"  asp-area="Admin" asp-action="Index" asp-controller="AdminHome" target="_blank">Quan ly</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="dropdown-divider"></div>
+                                        <form method="post" class="dropdown-item">
+                                            <button type="submit" class="btn btn-outline-primary"
+                                            asp-area="Identity" asp-action="Logout"
+                                            asp-controller="Accounts">
+                                                Đăng xuất
+                                            </button>
+                                        </form>
+                                    }
+
                                 </div>
                             </div>
                         </div>
@@ -68,7 +90,7 @@
                     else
                     {
                         <div class="col-md-1 align-items-end">
-                            <a class="nav-link"  asp-area="Identity" asp-action="Login" asp-controller="Accounts">Đăng nhập</a>
+                            <a class="nav-link" asp-area="Identity" asp-action="Login" asp-controller="Accounts">Đăng nhập</a>
                         </div>
                         <div class="col-md-1 align-items-end">
                             <a class="nav-link" asp-area="Identity" asp-action="Register" asp-controller="Accounts">Đăng ký</a>

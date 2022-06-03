@@ -11,6 +11,7 @@ namespace DocTruyen.DataAccess.Models
         public string LastName { get; set; }
         public DateTime Dob { get; set; }
         public string ProfileImgURL { get; set; }
+        public string PublicImgId { get; set; }
         #endregion
 
         #region RelationShips

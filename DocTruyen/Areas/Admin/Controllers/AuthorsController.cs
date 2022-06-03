@@ -25,25 +25,32 @@ namespace DocTruyen.Areas.Admin.Controllers
         #endregion
 
         #region Index
-        public async Task<IActionResult> Index(int page, string keyWord)
+        public async Task<IActionResult> Index(int page)
         {
-            const int pageSize = 5;
             page = page < 1 ? 1 : page;
-            keyWord = "dong";
-            if (!string.IsNullOrEmpty(keyWord))
-            {
-                var allAuthors = await _unitOfWork.Authors.GetAllAsync();
-                var authors = allAuthors.Where(a => a.Name.RemoveVietnameseSign().ToLower().Contains(keyWord.RemoveVietnameseSign().ToLower()));
-                var viewmodel = _mapper.Map<IEnumerable<AuthorViewModel>>(authors);
-                IPagedList<AuthorViewModel> pagedModel = new StaticPagedList<AuthorViewModel>(viewmodel, page, pageSize, viewmodel.Count());
-                return View(pagedModel);
-            }
 
             var pagedAuthors = await _unitOfWork.Authors.GetPagedListAsync(null, null, page, 1);
             IEnumerable<AuthorViewModel> VM = _mapper.Map<IEnumerable<AuthorViewModel>>(pagedAuthors);
             IPagedList<AuthorViewModel> pagedVM = new StaticPagedList<AuthorViewModel>(VM, pagedAuthors.GetMetaData());
 
             return View(pagedVM);
+        }
+        [HttpPost]
+        [HttpGet]
+        public async Task<IActionResult> Search(int page, string keyWord)
+        {
+            const int pageSize = 5;
+            page = page < 1 ? 1 : page;
+
+            if (!string.IsNullOrEmpty(keyWord))
+            {
+                var allAuthors = await _unitOfWork.Authors.GetAllAsync();
+                var authors = allAuthors.Where(a => a.Name.RemoveVietnameseSign().ToLower().Contains(keyWord.RemoveVietnameseSign().ToLower()));
+                var viewmodel = _mapper.Map<IEnumerable<AuthorViewModel>>(authors);
+                IPagedList<AuthorViewModel> pagedModel = new StaticPagedList<AuthorViewModel>(viewmodel, page, pageSize, viewmodel.Count());
+                return View("Index", pagedModel);
+            }
+            return RedirectToAction("index");
         }
         #endregion
 
@@ -94,7 +101,7 @@ namespace DocTruyen.Areas.Admin.Controllers
             return View(authorVM);
         }
 
-        //Post:Category/id
+        //Post:Auhtor/id
         [HttpPost]
         public async Task<IActionResult> Update(int id, AuthorVM authorVM)
         {
@@ -103,6 +110,7 @@ namespace DocTruyen.Areas.Admin.Controllers
             var author = await _unitOfWork.Authors.GetAysnc(c => c.Id == id, new List<string> { "Novels" });
             if (author == null) return View("NotFound");
 
+            
             if (authorVM.ProfileImgUrl != null)
             {
                 var result = await _imageService.AddImageAsync(authorVM.ProfileImgUrl);

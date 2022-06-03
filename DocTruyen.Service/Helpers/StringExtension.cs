@@ -31,9 +31,8 @@
         }
         public static string GetTwentyWords(this string str)
         {
-            str.Trim();
             if (string.IsNullOrEmpty(str)) return "Chưa cập nhật";
-
+            str.Trim();
             int wordCount = str.Split(' ').Length;
             if (wordCount <= 20) return str;
 

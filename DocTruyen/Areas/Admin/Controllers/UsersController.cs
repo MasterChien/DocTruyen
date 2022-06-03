@@ -5,6 +5,9 @@ using DocTruyen.Service.IRepository;
 using AutoMapper;
 using DocTruyen.Service.VMs.User;
 using X.PagedList;
+using DocTruyen.Service.Vms.UserRole;
+using DocTruyen.Service.VMs.Role;
+using DocTruyen.Service.Helpers;
 
 namespace DocTruyen.Areas.Admin.Controllers
 {
@@ -14,10 +17,12 @@ namespace DocTruyen.Areas.Admin.Controllers
         #region Constructor
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public UsersController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IImageService _imageService;
+        public UsersController(IUnitOfWork unitOfWork, IMapper mapper, IImageService imageService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _imageService = imageService;
         }
         #endregion
 
@@ -27,47 +32,37 @@ namespace DocTruyen.Areas.Admin.Controllers
             const int pageSize = 5;
             var pageNumber = page ?? 1;
 
-            var users = await _unitOfWork.AppUsers.GetPagedListAsync(null, null, pageNumber, pageSize);
-            IEnumerable<UserVM> VM = _mapper.Map<IEnumerable<UserVM>>(users);
-            IPagedList<UserVM> pagedVM = new StaticPagedList<UserVM>(VM, users.GetMetaData());
+            var users = await _unitOfWork.AppUsers.GetPagedListAsync(null, null, pageNumber, pageSize, new List<string> { "UserRoles" });
+           
+            IEnumerable<UserVM> vms = _mapper.Map<IEnumerable<UserVM>>(users);
+            
+            IPagedList<UserVM> pagedVM = new StaticPagedList<UserVM>(vms, users.GetMetaData());
             return View(pagedVM);
         }
 
-        // GET: Admin/Users/Details/5
+        //GET: Admin/Users/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var user = await _unitOfWork.AppUsers.GetAysnc(u => u.Id == id);
-            if (user==null)
+            var user = await _unitOfWork.AppUsers.GetAysnc(u => u.Id == id, new List<string> { "UserRoles" });
+            if (user == null)
             {
                 ViewBag.ErrorMassage = "Không tìm thấy người dùng này";
                 return View("NotFound");
             }
 
             var userVM = _mapper.Map<UserVM>(user);
+            foreach (var userRole in user.UserRoles)
+            {
+                if(userRole != null)
+                {
+                    var role = await _unitOfWork.AppRoles.GetAysnc(r => r.Id == userRole.RoleId);
+                    userVM.Roles.Add(role.Name);
+                }
+            }
 
             return View(userVM);
         }
 
-        // GET: Admin/Users/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Admin/Users/Create
-        
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("FirstName,LastName,Dob,ProfileImgURL,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] AppUser appUser)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(appUser);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(appUser);
-        //}
 
         // GET: Admin/Users/Edit/5
         public async Task<IActionResult> Edit(int id)
@@ -78,58 +73,64 @@ namespace DocTruyen.Areas.Admin.Controllers
                 ViewBag.ErrorMassage = "Không tìm thấy người dùng này";
                 return View("NotFound");
             }
-
-           
-            return View(appUser);
+            var userVM = _mapper.Map<EditUserVM>(user);
+            return View(userVM);
         }
 
         // POST: Admin/Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FirstName,LastName,Dob,ProfileImgURL,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] AppUser appUser)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, EditUserVM editUser)
         {
-            if (id != appUser.Id)
+            var user = await _unitOfWork.AppUsers.GetAysnc(u => u.Id == id);
+            if (user == null)
             {
-                return NotFound();
+                ViewBag.ErrorMassage = "Không tìm thấy người dùng này";
+                return View("NotFound");
             }
 
             if (ModelState.IsValid)
             {
-                try
+                if (editUser.ProfileImg != null)
                 {
-                    _context.Update(appUser);
-                    await _context.SaveChangesAsync();
+                    var result = await _imageService.AddImageAsync(editUser.ProfileImg);
+                    if (result.Error != null) return View("NotFound");
+                    user.PublicImgId = result.PublicId;
+                    user.ProfileImgURL = result.SecureUrl.AbsoluteUri;
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AppUserExists(appUser.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                user.EmailConfirmed = editUser.EmailConfirmed;
+                user.UserName = editUser.UserName;
+
+                _unitOfWork.AppUsers.Update(user);
+                await _unitOfWork.SaveAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(appUser);
+            return View(editUser);
         }
+        public async Task<IActionResult> Search(int page, string keyWord)
+        {
+            const int pageSize = 5;
+            page = page < 1 ? 1 : page;
 
+            if (!string.IsNullOrEmpty(keyWord))
+            {
+                var allUser = await _unitOfWork.AppUsers.GetAllAsync();
+                var users = allUser.Where(u => u.UserName.RemoveVietnameseSign()
+                .ToLower().Contains(keyWord.RemoveVietnameseSign().ToLower())|| u.Email.Contains(keyWord));
+                var viewmodel = _mapper.Map<IEnumerable<UserVM>>(users);
+                IPagedList<UserVM> pagedModel = new StaticPagedList<UserVM>(viewmodel, page, pageSize, viewmodel.Count());
+                return View("Index", pagedModel);
+            }
+            return RedirectToAction("index");
+        }
         // GET: Admin/Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Users == null)
-            {
-                return NotFound();
-            }
-
-            var appUser = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var appUser = await _unitOfWork.AppUsers.GetAysnc(u => u.Id == id);
             if (appUser == null)
             {
+                ViewBag.ErrorMassage = "Không tìm thấy người dùng này";
                 return NotFound();
             }
 
@@ -141,23 +142,15 @@ namespace DocTruyen.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Users == null)
+            var appUser = await _unitOfWork.AppUsers.GetAysnc(u => u.Id == id);
+            if (appUser == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Users'  is null.");
+                ViewBag.ErrorMassage = "Không tìm thấy người dùng này";
+                return NotFound();
             }
-            var appUser = await _context.Users.FindAsync(id);
-            if (appUser != null)
-            {
-                _context.Users.Remove(appUser);
-            }
-            
-            await _context.SaveChangesAsync();
+            await _unitOfWork.AppUsers.DeleteAsync(id);
+            await _unitOfWork.SaveAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool AppUserExists(int id)
-        {
-          return _context.Users.Any(e => e.Id == id);
         }
     }
 }

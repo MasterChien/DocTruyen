@@ -132,7 +132,7 @@ namespace DocTruyen.Areas.Admin.Controllers
 
             await _unitOfWork.RoleManagers.DeleteAsync(role);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ListRoles));
         }
         #endregion
     }

@@ -45,6 +45,9 @@ namespace DocTruyen.DataAccess.Data
         public DbSet<Novel> Novels { get; set; }
         public DbSet<UserReadingLog> UserReadingLogs { get; set; }
         public DbSet<ViewCount> ViewCounts { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<AppRole> AppRoles { get; set; }
+        public DbSet<AppUseRole> AppUserRoles { get; set; }
 
     }
 }

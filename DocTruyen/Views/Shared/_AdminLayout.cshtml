@@ -24,19 +24,19 @@
                     <span class="nav_logo-name">Bootstrap</span>
                 </a>
                 <div class="nav_list">
-                    <a asp-controller="Authors" asp-action="Index" class="nav_link active">
+                    <a class="nav_link active" asp-controller="Authors" asp-action="Index" >
                         <i class="bx bx-grid-alt nav_icon"></i>
                         <span class="nav_name">Authors</span>
                     </a>
-                    <a asp-controller="Roles" asp-action="CreateRole" class="nav_link">
+                    <a class="nav_link" asp-controller="Users" asp-action="Index">
                         <i class='bx bx-user nav_icon'></i>
+                        <span class="nav_name">User</span>
+                    </a>
+                    <a class="nav_link" asp-action="ListRoles" asp-controller="Roles">
+                        <i class='bx bx-message-square-detail nav_icon'></i>
                         <span class="nav_name">Roles</span>
                     </a>
-                    <a href="#" class="nav_link">
-                        <i class='bx bx-message-square-detail nav_icon'></i>
-                        <span class="nav_name">Messages</span>
-                    </a>
-                    <a href="#" class="nav_link">
+                    <a  class="nav_link" asp-action="Index" asp-controller="Categories">
                         <i class='bx bx-bookmark nav_icon'></i>
                         <span class="nav_name">Bookmark</span>
                     </a>
@@ -63,11 +63,11 @@
             </main>
         </div>
     </div>
-    <footer class="border-top footer text-muted">
+   @* <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - DocTruyen
         </div>
-    </footer>
+    </footer>*@
     <script src="~/js/AdminToggleSidebar.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
