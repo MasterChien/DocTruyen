@@ -92,7 +92,7 @@ namespace DocTruyen.Areas.User.Controllers
         public async Task<IActionResult> UploadNovel(UploadNovelVM novelUpload)
         {
             if (!ModelState.IsValid) return View(novelUpload);
-
+            
             Novel novel = new Novel
             {
                 Name = novelUpload.Name,

@@ -1,10 +1,10 @@
 ﻿@using DocTruyen.Service.VMs.Home
 @model List<SlideVM>
 
-<div class="bg-light">
-    <div class="row d-flex justify-content-center mt-5">
-        <div class="col-md-8 mt-3">
-            <div id="carouselExampleCaptions" class="carousel slide pb-3" data-bs-ride="carousel">
+<div class="bg-dark cmt mt-5">
+    <div class="row d-flex justify-content-center mt-3">
+        <div class="col-md-8 mt-3 ">
+            <div id="carouselExampleCaptions" class="carousel slide pb-3 slide-rounded" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     @for (var i = 1; i < Model.Count; i++)
@@ -24,10 +24,10 @@
                         {
                             <div class="carousel-item @activeClass">
                                 <a asp-controller="Novels" asp-action="Details" asp-route-id="@VM.NovelId">
-                                    <img src="@VM.ImagePath" class="d-block w-100 img-rounded" alt="slide@(index)">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>@VM.NovelName</h5>
-                                        <p>@VM.ShortDes</p>
+                                    <img src="@VM.ImagePath" class="d-block w-100 img-rounded" alt="slide@(index)" style="max-height:22em">
+                                    <div class="carousel-caption d-none d-md-block slide-rounded" style="background-color: rgba(0,0,0,0.7);">
+                                        <h5 class="font-weight-bold text-white">@VM.NovelName</h5>
+                                        <p class="font-weight-normal text-white">@VM.ShortDes</p>
                                     </div>
                                 </a>
                             </div>
@@ -36,10 +36,10 @@
                         {
                             <div class="carousel-item">
                                 <a asp-controller="Novels" asp-action="Details" asp-route-id="@VM.NovelId">
-                                    <img src="@VM.ImagePath" class="d-block w-100" alt="slide@(index)">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>@VM.NovelName</h5>
-                                        <p>@VM.ShortDes</p>
+                                    <img src="@VM.ImagePath" class="d-block w-100" alt="slide@(index)" style="max-height:22em">
+                                    <div class="carousel-caption d-none d-md-block slide-rounded" style="background-color: rgba(0,0,0,0.7);">
+                                        <h5 class="font-weight-bold text-white">@VM.NovelName</h5>
+                                        <p class="font-weight-normal text-white">@VM.ShortDes</p>
                                     </div>
                                 </a>
                             </div>
