@@ -10,7 +10,7 @@ namespace DocTruyen.Service.VMs.Chapter
         public int NextChapterId { get; set; }
         public int PreviousChapterId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string ContentPath { get; set; }
+        public string Content { get; set; }
         public int NovelId { get; set; }
 
     }

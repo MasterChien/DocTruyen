@@ -321,7 +321,7 @@ namespace DocTruyen.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ContentPath")
+                    b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
@@ -351,7 +351,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ContentPath = "Đây là nội dung chương 1",
+                            Content = "Đây là nội dung chương 1",
                             CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5047),
                             Index = 1,
                             NovelId = 1,
@@ -361,7 +361,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            ContentPath = "Đây là nội dung chương 2",
+                            Content = "Đây là nội dung chương 2",
                             CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5050),
                             Index = 2,
                             NovelId = 1,
@@ -371,7 +371,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            ContentPath = "Đây là nội dung chương 3",
+                            Content = "Đây là nội dung chương 3",
                             CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5052),
                             Index = 3,
                             NovelId = 1,
@@ -381,7 +381,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 4,
-                            ContentPath = "Đây là nội dung chương 1 truyện Già Thiên",
+                            Content = "Đây là nội dung chương 1 truyện Già Thiên",
                             CreatedDate = new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5053),
                             Index = 1,
                             NovelId = 2,

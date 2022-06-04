@@ -239,7 +239,7 @@ namespace DocTruyen.DataAccess.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Index = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ContentPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PublisherId = table.Column<int>(type: "int", nullable: false),
                     NovelId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -419,7 +419,7 @@ namespace DocTruyen.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Chapters",
-                columns: new[] { "Id", "ContentPath", "CreatedDate", "Index", "NovelId", "PublisherId", "Title" },
+                columns: new[] { "Id", "Content", "CreatedDate", "Index", "NovelId", "PublisherId", "Title" },
                 values: new object[,]
                 {
                     { 1, "Đây là nội dung chương 1", new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5047), 1, 1, 2, "Mở đầu" },

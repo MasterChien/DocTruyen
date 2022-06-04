@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DocTruyen.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220602051201_public_img_id")]
-    partial class public_img_id
+    [Migration("20220604125019_updatechapter")]
+    partial class updatechapter
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,7 +60,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "6d6ac84e-f8d6-41f1-8c7f-7b048613e5e4",
+                            ConcurrencyStamp = "1e4b83f4-5e17-462d-99d0-0dce3e022091",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -68,7 +68,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "94e06366-73f6-4b82-bfe0-161ebbd0b711",
+                            ConcurrencyStamp = "d23cddbd-da8e-489f-915b-9020ea8b54d4",
                             Description = "user role",
                             Name = "user",
                             NormalizedName = "user"
@@ -162,7 +162,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2361cfeb-585e-4785-a8b0-f05f3faaf379",
+                            ConcurrencyStamp = "8b170015-3642-4a4f-a93c-5d999f1e9033",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "masterchienboy@gmail.com",
                             EmailConfirmed = true,
@@ -171,7 +171,7 @@ namespace DocTruyen.DataAccess.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "masterchienboy@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAED19RXuaSgRK0pTUNFQEwudXqLUQuclLH5mPujpjzc3KmsRxg6sfxjKfZykSv/dC1g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH0fPVXYLDu7Q8ge/tF/xqB7XLv4iUH0eS74jLVcIQVIAB1Gr5fvJt3nhQGlp/xivQ==",
                             PhoneNumberConfirmed = false,
                             ProfileImgURL = "https://i.imgur.com/stD0Q19.jpg",
                             SecurityStamp = "",
@@ -182,7 +182,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aba7ffb0-dcdb-4b87-ae4d-93faf2f5e524",
+                            ConcurrencyStamp = "4351e59e-712c-4798-afce-c11f4cd9d783",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user1@gmail.com",
                             EmailConfirmed = true,
@@ -191,7 +191,7 @@ namespace DocTruyen.DataAccess.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user1@gmail.com",
                             NormalizedUserName = "user1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN6t+UpjBjmCugcR8MKiIiNpff9Kbhtmn8RolnQLdkPqw/6mcSdiHTuRPNj5fQEUVg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPqgGor1DtuPT/L22Cgdww2BmInwCU1VLDb1Tk3vgd5HjukZPaju+xBElGq+aGoc/Q==",
                             PhoneNumberConfirmed = false,
                             ProfileImgURL = "https://i.imgur.com/stD0Q19.jpg",
                             SecurityStamp = "",
@@ -202,7 +202,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "43d9d9e1-48aa-47e9-ab27-5d4b8476a50f",
+                            ConcurrencyStamp = "5d142382-f396-43f3-a81d-3743f61ba9e8",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user2@gmail.com",
                             EmailConfirmed = true,
@@ -211,7 +211,7 @@ namespace DocTruyen.DataAccess.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user2@gmail.com",
                             NormalizedUserName = "user2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOPpTAUlGNpgKgLNfaW4tZKERSHjeimw8dTI8TFGc6aaVO9nc7n3cQVu+vYC+IAEcw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAK+1zi9JcXgGs4yxUnK40h482h8+bBzqjM0irrZTF53upyLZRKdOdEZznOz0A+JVA==",
                             PhoneNumberConfirmed = false,
                             ProfileImgURL = "https://i.imgur.com/xELPaag.jpg",
                             SecurityStamp = "",
@@ -355,7 +355,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 1,
                             Content = "Đây là nội dung chương 1",
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(407),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4838),
                             Index = 1,
                             NovelId = 1,
                             PublisherId = 2,
@@ -365,7 +365,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 2,
                             Content = "Đây là nội dung chương 2",
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(409),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4840),
                             Index = 2,
                             NovelId = 1,
                             PublisherId = 2,
@@ -375,7 +375,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 3,
                             Content = "Đây là nội dung chương 3",
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(411),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4842),
                             Index = 3,
                             NovelId = 1,
                             PublisherId = 2,
@@ -385,7 +385,7 @@ namespace DocTruyen.DataAccess.Migrations
                         {
                             Id = 4,
                             Content = "Đây là nội dung chương 1 truyện Già Thiên",
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(412),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4843),
                             Index = 1,
                             NovelId = 2,
                             PublisherId = 3,
@@ -433,7 +433,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(435),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4868),
                             NovelId = 1,
                             Text = "Truyện rất hay",
                             UserId = 2
@@ -441,7 +441,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(437),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4870),
                             NovelId = 1,
                             Text = "Truyện rất hay",
                             UserId = 3
@@ -449,7 +449,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(439),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4872),
                             NovelId = 2,
                             Text = "Truyện như lone",
                             UserId = 3
@@ -457,7 +457,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(440),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4873),
                             NovelId = 1,
                             ParrentId = 1,
                             Text = "Đồng quan điểm",
@@ -466,7 +466,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(442),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4875),
                             NovelId = 1,
                             ParrentId = 1,
                             Text = "Bạc quan điểm",
@@ -475,7 +475,7 @@ namespace DocTruyen.DataAccess.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(443),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4876),
                             NovelId = 1,
                             ParrentId = 3,
                             Text = "Vô học",
@@ -565,7 +565,7 @@ namespace DocTruyen.DataAccess.Migrations
                             Id = 1,
                             AuthorId = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(371),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4800),
                             Description = "- Từ Địa Cầu xuyên việt tới Dị giới đã thấy nhiều, nhưng Diệp Mặc của chúng ta lại từ Dị giới xuyên tới Địa Cầu.Điều này còn chưa phải là buồn bực nhất, để cho Diệp Mặc phát điên chính là cậu nhỏ của hắn bị liệt.",
                             Name = "Thiếu gia bị bỏ rơi",
                             PublisherId = 2,
@@ -578,7 +578,7 @@ namespace DocTruyen.DataAccess.Migrations
                             Id = 2,
                             AuthorId = 2,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2022, 6, 2, 12, 12, 0, 433, DateTimeKind.Local).AddTicks(382),
+                            CreatedDate = new DateTime(2022, 6, 4, 19, 50, 18, 672, DateTimeKind.Local).AddTicks(4810),
                             Description = "Trong vũ trụ bao la, một mảnh tinh hệ sinh diệt, cũng bất quá là sát na pha tạp lưu quang.Ngắm nhìn bầu trời, luôn có loại thương cảm kết cục đã nhất định,trăm ngàn năm sau ngươi ta ở đâu ? Gia quốc, ánh lửa văn minh,Địa Cầu, đều chẳng qua là trong thâm không một hạt bụi.",
                             Name = "Già Thiên",
                             PublisherId = 3,
