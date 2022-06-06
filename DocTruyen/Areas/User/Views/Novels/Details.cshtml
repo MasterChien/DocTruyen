@@ -13,6 +13,7 @@
             <div class="">Đánh giá: @Model.Rating</div><br />
             <div class="">Tác giả: @Model.AuthorName</div><br />
             <a class="btn btn-primary" asp-action="Read" asp-route-id="@Model.Chapters.FirstOrDefault().Id">Đọc truyện</a>
+            <a class="btn btn-primary" asp-controller="Chapters" asp-action="Create" asp-route-novelId="@Model.Id">Thêm chương</a>
         </div>
     </div>
 </div>

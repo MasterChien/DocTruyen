@@ -85,23 +85,28 @@ namespace DocTruyen.Areas.User.Controllers
 
             novelUpload.Categories = _mapper.Map<List<CategoryVM>>
               (await _unitOfWork.Categories.GetAllAsync());
+            novelUpload.AuthorName = "Chưa cập nhật";
            
             return View(novelUpload);
         }
         [HttpPost]
-        public async Task<IActionResult> UploadNovel(UploadNovelVM novelUpload)
+        public async Task<IActionResult> UploadNovel(int novelId, UploadNovelVM novelUpload)
         {
             if (!ModelState.IsValid) return View(novelUpload);
-
+            
             Novel novel = new Novel
             {
                 Name = novelUpload.Name,
                 Description = novelUpload.Description,
                 CreatedDate = DateTime.Now,
-                AuthorId = novelUpload.AuthorId,
+                //AuthorId = novelUpload.AuthorId,
                 CategoryId = novelUpload.CategoryId,
                 Status = NovelStatus.OnGoing
             };
+
+            if(novelUpload.IsExsitAuthor)
+                novel.AuthorId = novelUpload.AuthorId;
+            
             AppUser appUser = await _unitOfWork.UserManagers.GetUserAsync(User);
             novel.PublisherId = appUser.Id;
             

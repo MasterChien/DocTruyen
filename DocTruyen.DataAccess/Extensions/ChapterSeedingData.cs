@@ -15,7 +15,7 @@ namespace DocTruyen.DataAccess.Extensions
                     Title = "Mở đầu",
                     Index = 1,
                     NovelId = 1,
-                    ContentPath = "Đây là nội dung chương 1",
+                    Content = "Đây là nội dung chương 1",
                     PublisherId = 2,
                     CreatedDate = DateTime.Now
                 },
@@ -25,7 +25,7 @@ namespace DocTruyen.DataAccess.Extensions
                     Title = "Bắt đầu mới",
                     Index = 2,
                     NovelId = 1,
-                    ContentPath = "Đây là nội dung chương 2",
+                    Content = "Đây là nội dung chương 2",
                     PublisherId = 2,
                     CreatedDate = DateTime.Now
                 },
@@ -35,7 +35,7 @@ namespace DocTruyen.DataAccess.Extensions
                     Title = "Tu luyện",
                     Index = 3,
                     NovelId = 1,
-                    ContentPath = "Đây là nội dung chương 3",
+                    Content = "Đây là nội dung chương 3",
                     PublisherId = 2,
                     CreatedDate = DateTime.Now
                 },
@@ -45,7 +45,7 @@ namespace DocTruyen.DataAccess.Extensions
                     Title = "Mở đầu",
                     Index = 1,
                     NovelId = 2,
-                    ContentPath = "Đây là nội dung chương 1 truyện Già Thiên",
+                    Content = "Đây là nội dung chương 1 truyện Già Thiên",
                     PublisherId = 3,
                     CreatedDate = DateTime.Now
                 });

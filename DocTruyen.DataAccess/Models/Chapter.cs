@@ -7,7 +7,7 @@
         public string Title { get; set; }
         public int Index { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string ContentPath { get; set; }
+        public string Content { get; set; }
         #endregion
 
         #region RelationShips

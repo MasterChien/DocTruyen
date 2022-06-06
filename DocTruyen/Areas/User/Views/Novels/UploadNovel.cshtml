@@ -11,22 +11,35 @@
     <div class="col-md-12">
         <form asp-action="UploadNovel" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group row mt-3">
+            <div class="form-group row mt-3 bg-light">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control mt-1" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group row mt-3">
-                <label asp-for="AuthorId" class="control-label"></label>
-                <select asp-for="AuthorId" class="form-control mt-1" asp-items="@(new SelectList(@Model.Authors,"AuthorId","Name"))"></select>
-                <span asp-validation-for="AuthorId" class="text-danger"></span>
+            <div class="form-group row mt-3 ">
+                <div class="row">
+                    <label for="rbtn_exist" style="cursor:pointer" class="control-label">
+                        <input asp-for="IsExsitAuthor" value="true" checked type="radio" id="rbtn_exist" />
+                        Chọn tác giả đã có
+                    </label>
+                    <select asp-for="AuthorId" class="form-control mt-1" id="is_exist" asp-items="@(new SelectList(@Model.Authors,"Id","Name"))"></select>
+                    <span asp-validation-for="AuthorId" class="text-danger"></span>
+                </div>
+                <div class="row mt-3">
+                    <label for="rbtn_new" style="cursor:pointer" class="control-label">
+                        <input asp-for="IsExsitAuthor" value="false" type="radio" id="rbtn_new" />
+                        Thêm tác giả mới
+                    </label>
+                    <input asp-for="AuthorName" class="form-control mt-1" id="is_new" />
+                    <span asp-validation-for="AuthorName" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group row mt-3">
+            <div class="form-group row mt-3 ">
                 <label asp-for="CategoryId" class="control-label "></label>
-                <select asp-for="CategoryId" class="form-control mt-1" asp-items="@(new SelectList(@Model.Categories,"CategoryId","Name"))"></select>
+                <select asp-for="CategoryId" class="form-control mt-1" asp-items="@(new SelectList(@Model.Categories,"Id","Name"))"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
-            <div class="form-group row mt-3">
+            <div class="form-group row mt-3 ">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control mt-1 w-100" id="novel_desc" />
                 <span asp-validation-for="Description" class="text-danger"></span>
@@ -73,5 +86,18 @@
             .catch(err => {
                 console.error(err.stack);
             });
+    </script>
+    <script>
+        $("input:radio").click(function() {
+            if ($(this).val() == "true") {
+                $('#is_exist').removeAttr('disabled');
+                $('#is_new').attr('disabled', 'disabled');
+                console.log($(this).val());
+            } else {
+                $('#is_new').removeAttr('disabled');
+                $('#is_exist').attr('disabled', 'disabled');
+                console.log($(this).val());
+            }
+        });
     </script>
 }

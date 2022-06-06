@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DocTruyen.DataAccess.Migrations
 {
-    public partial class Identity : Migration
+    public partial class EditFieldContentPath : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,6 +35,7 @@ namespace DocTruyen.DataAccess.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Dob = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProfileImgURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublicImgId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -239,7 +240,7 @@ namespace DocTruyen.DataAccess.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Index = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ContentPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PublisherId = table.Column<int>(type: "int", nullable: false),
                     NovelId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -374,18 +375,18 @@ namespace DocTruyen.DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "bc00f3d4-740d-48be-bc83-8c0e1d93d7fb", "Administrator role", "admin", "admin" },
-                    { 2, "d90daee0-4361-4919-8da0-c0d4ae1f6d8f", "user role", "user", "user" }
+                    { 1, "7c64b8c9-c31f-4ec5-b337-f85520638784", "Administrator role", "admin", "admin" },
+                    { 2, "6c8a6175-a983-479e-b13e-d8ac6eb5a249", "user role", "user", "user" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Dob", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfileImgURL", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Dob", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfileImgURL", "PublicImgId", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "b31f972b-9f81-4212-a903-0dfc5b6f5875", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "masterchienboy@gmail.com", true, "Chien", "Hoang Van", false, null, "masterchienboy@gmail.com", "admin", "AQAAAAEAACcQAAAAEIDXZO5ooipDUUm7PUg/vsKygBT607TGuU0K7yE03P82DLH4yTsPvPrA5DjsFwhSxQ==", null, false, "https://i.imgur.com/stD0Q19.jpg", "", false, "admin" },
-                    { 2, 0, "dfed52be-2411-4218-88c7-2b84135c19d0", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "user1@gmail.com", true, "Chien", "Hoang Van", false, null, "user1@gmail.com", "user1", "AQAAAAEAACcQAAAAEOTvbnD7uzyzvyDkHbxOXJHe3lDKdLSWCm3tIaXA1anjpcgT87b1nBattUHHRHViOQ==", null, false, "https://i.imgur.com/stD0Q19.jpg", "", false, "user1" },
-                    { 3, 0, "5869745f-ea38-4909-8286-686e7f04bc1d", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "user2@gmail.com", true, "Chien", "Hoang Van", false, null, "user2@gmail.com", "user2", "AQAAAAEAACcQAAAAEMwio2hQOrXh6S5V+OR9hKMdYjz6MO12G/Xgt33wdwE4T/W0c3grzFiCtl7UiM4VGw==", null, false, "https://i.imgur.com/xELPaag.jpg", "", false, "user2" }
+                    { 1, 0, "bdfd46ff-155b-4053-94f1-86cc32a3eda9", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "masterchienboy@gmail.com", true, "Chien", "Hoang Van", false, null, "masterchienboy@gmail.com", "admin", "AQAAAAEAACcQAAAAEKZ+xPKkxGgLOHBbPWcClDTNAvh77E9LF1AZC5kTkicaaxzyiWJBXJSx0gbGkK2gag==", null, false, "https://i.imgur.com/stD0Q19.jpg", null, "", false, "admin" },
+                    { 2, 0, "a82ea840-1567-46f2-bb36-57ebfde00b5c", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "user1@gmail.com", true, "Chien", "Hoang Van", false, null, "user1@gmail.com", "user1", "AQAAAAEAACcQAAAAEIWvdqEqxIP7MUpu603VQ0X/EJxHsFuIKbqQekS+I1pPNd8A+3G4Yubf8dKnxWQBmQ==", null, false, "https://i.imgur.com/stD0Q19.jpg", null, "", false, "user1" },
+                    { 3, 0, "bc20413a-39e4-4ecb-856e-18641555fceb", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "user2@gmail.com", true, "Chien", "Hoang Van", false, null, "user2@gmail.com", "user2", "AQAAAAEAACcQAAAAEMg2w198sIercbfeFpF86K/KCkMWz4Dmmbb6VVZW8XAMVRukCm0yN4AUPLlXkosnYg==", null, false, "https://i.imgur.com/xELPaag.jpg", null, "", false, "user2" }
                 });
 
             migrationBuilder.InsertData(
@@ -410,22 +411,22 @@ namespace DocTruyen.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Novels",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "CreatedDate", "Description", "Name", "PublisherId", "Rating", "Status", "TotalChapter" },
-                values: new object[] { 1, 1, 1, new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5013), "- Từ Địa Cầu xuyên việt tới Dị giới đã thấy nhiều, nhưng Diệp Mặc của chúng ta lại từ Dị giới xuyên tới Địa Cầu.Điều này còn chưa phải là buồn bực nhất, để cho Diệp Mặc phát điên chính là cậu nhỏ của hắn bị liệt.", "Thiếu gia bị bỏ rơi", 2, 4.5, 1, 0 });
+                values: new object[] { 1, 1, 1, new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(1941), "- Từ Địa Cầu xuyên việt tới Dị giới đã thấy nhiều, nhưng Diệp Mặc của chúng ta lại từ Dị giới xuyên tới Địa Cầu.Điều này còn chưa phải là buồn bực nhất, để cho Diệp Mặc phát điên chính là cậu nhỏ của hắn bị liệt.", "Thiếu gia bị bỏ rơi", 2, 4.5, 1, 0 });
 
             migrationBuilder.InsertData(
                 table: "Novels",
                 columns: new[] { "Id", "AuthorId", "CategoryId", "CreatedDate", "Description", "Name", "PublisherId", "Rating", "Status", "TotalChapter" },
-                values: new object[] { 2, 2, 2, new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5023), "Trong vũ trụ bao la, một mảnh tinh hệ sinh diệt, cũng bất quá là sát na pha tạp lưu quang.Ngắm nhìn bầu trời, luôn có loại thương cảm kết cục đã nhất định,trăm ngàn năm sau ngươi ta ở đâu ? Gia quốc, ánh lửa văn minh,Địa Cầu, đều chẳng qua là trong thâm không một hạt bụi.", "Già Thiên", 3, 4.5, 2, 0 });
+                values: new object[] { 2, 2, 2, new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(1952), "Trong vũ trụ bao la, một mảnh tinh hệ sinh diệt, cũng bất quá là sát na pha tạp lưu quang.Ngắm nhìn bầu trời, luôn có loại thương cảm kết cục đã nhất định,trăm ngàn năm sau ngươi ta ở đâu ? Gia quốc, ánh lửa văn minh,Địa Cầu, đều chẳng qua là trong thâm không một hạt bụi.", "Già Thiên", 3, 4.5, 2, 0 });
 
             migrationBuilder.InsertData(
                 table: "Chapters",
-                columns: new[] { "Id", "ContentPath", "CreatedDate", "Index", "NovelId", "PublisherId", "Title" },
+                columns: new[] { "Id", "Content", "CreatedDate", "Index", "NovelId", "PublisherId", "Title" },
                 values: new object[,]
                 {
-                    { 1, "Đây là nội dung chương 1", new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5047), 1, 1, 2, "Mở đầu" },
-                    { 2, "Đây là nội dung chương 2", new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5050), 2, 1, 2, "Bắt đầu mới" },
-                    { 3, "Đây là nội dung chương 3", new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5052), 3, 1, 2, "Tu luyện" },
-                    { 4, "Đây là nội dung chương 1 truyện Già Thiên", new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5053), 1, 2, 3, "Mở đầu" }
+                    { 1, "Đây là nội dung chương 1", new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(1976), 1, 1, 2, "Mở đầu" },
+                    { 2, "Đây là nội dung chương 2", new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(1979), 2, 1, 2, "Bắt đầu mới" },
+                    { 3, "Đây là nội dung chương 3", new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(1980), 3, 1, 2, "Tu luyện" },
+                    { 4, "Đây là nội dung chương 1 truyện Già Thiên", new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(1982), 1, 2, 3, "Mở đầu" }
                 });
 
             migrationBuilder.InsertData(
@@ -433,12 +434,12 @@ namespace DocTruyen.DataAccess.Migrations
                 columns: new[] { "Id", "CommentId", "CreatedDate", "NovelId", "ParrentId", "Text", "UserId" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5074), 1, null, "Truyện rất hay", 2 },
-                    { 2, null, new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5077), 1, null, "Truyện rất hay", 3 },
-                    { 3, null, new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5078), 2, null, "Truyện như lone", 3 },
-                    { 4, null, new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5080), 1, 1, "Đồng quan điểm", 2 },
-                    { 5, null, new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5081), 1, 1, "Bạc quan điểm", 2 },
-                    { 6, null, new DateTime(2022, 5, 31, 13, 4, 21, 308, DateTimeKind.Local).AddTicks(5083), 1, 3, "Vô học", 3 }
+                    { 1, null, new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(2003), 1, null, "Truyện rất hay", 2 },
+                    { 2, null, new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(2006), 1, null, "Truyện rất hay", 3 },
+                    { 3, null, new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(2008), 2, null, "Truyện như lone", 3 },
+                    { 4, null, new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(2009), 1, 1, "Đồng quan điểm", 2 },
+                    { 5, null, new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(2011), 1, 1, "Bạc quan điểm", 2 },
+                    { 6, null, new DateTime(2022, 6, 4, 20, 28, 0, 402, DateTimeKind.Local).AddTicks(2012), 1, 3, "Vô học", 3 }
                 });
 
             migrationBuilder.CreateIndex(

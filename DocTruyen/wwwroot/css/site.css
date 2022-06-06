@@ -13,13 +13,12 @@ html {
 }
 
 
-/*body {
-    background-image: url("/img/bg.webp");
-   //height: 100vh;
-   background-image: linear-gradient()
-}*/
+.form-control .disabled {
+    color: #adb5bd;
+    pointer-events: none;
+    background-color: transparent;
+}
 /*------------Logo---------------*/
-
 .mtclogo {
     width: 3em;
     height: 3em;
@@ -68,6 +67,9 @@ input[type=text] {
 
 /*-----------Slide Show----------*/
 .carousel-item img {
+    border-radius: 0.5em;
+}
+.slide-rounded {
     border-radius: 0.5em;
 }
 /*-----------End Slide Show----------*/

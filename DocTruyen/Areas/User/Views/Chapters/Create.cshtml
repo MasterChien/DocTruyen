@@ -1,0 +1,59 @@
+﻿@model DocTruyen.Service.VMs.Chapter.CreateChapterVM
+
+@{
+    ViewData["Title"] = "Thêm Chương";
+}
+
+<h1>Thêm Chương Mới</h1>
+<h3>@Model.NovelName</h3>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row mt-3 bg-light">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control mt-1" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row mt-3 ">
+                <label asp-for="Index" class="control-label"></label>
+                <input asp-for="Index" class="form-control mt-1 w-100" id="novel_desc" />
+                <span asp-validation-for="Index" class="text-danger"></span>
+            </div>
+            <div class="form-group row mt-3 ">
+                <label asp-for="Content" class="control-label"></label>
+                <input asp-for="Content" class="form-control mt-1 w-100" id="chapter_content" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Details" asp-controller="Novels">Quay lại trang truyện</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#chapter_content'), {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+    </script>
+}
