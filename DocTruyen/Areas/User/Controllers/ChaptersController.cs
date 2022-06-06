@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DocTruyen.Areas.User.Controllers
 {
+    [Area("User")]
     public class ChaptersController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -15,34 +16,39 @@ namespace DocTruyen.Areas.User.Controllers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<IActionResult> Create(int id)
+        public async Task<IActionResult> Create(int novelId)
         {
-            var novel = await _unitOfWork.Novels.GetAysnc(n => n.Id == id);
+            var novel = await _unitOfWork.Novels.GetAysnc(n => n.Id == novelId);
             if (novel == null)
             {
                 ViewBag.ErrorMassage = "Không tìm thấy truyện";
                 return View("NotFound");
             }
-            var model = new CreateChapterVM { NovelName = novel.Name,NovelId = novel.Id };
+            var allChapters = await _unitOfWork.Chapters.GetAllAsync(n => n.NovelId == novelId);
+           
+            var totalChapter = allChapters.Count();
+
+            var model = new CreateChapterVM
+            {
+                NovelName = novel.Name,
+                NovelId = novel.Id,
+                Index = totalChapter + 1,
+                PublisherId = (int)novel.PublisherId
+            };
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(int id, CreateChapterVM createChapter)
+        public async Task<IActionResult> Create(int novelId, CreateChapterVM createChapter)
         {
-            var novel = await _unitOfWork.Novels.GetAysnc(n => n.Id == id);
+            var novel = await _unitOfWork.Novels.GetAysnc(n => n.Id == novelId);
             if (novel == null)
             {
                 ViewBag.ErrorMassage = "Không tìm thấy truyện";
                 return View("NotFound");
             }
-            var user = await _unitOfWork.UserManagers.GetUserAsync(User);
-            if(user == null)
-            {
-                ViewBag.ErrorMassage = "Không tìm thấy người dùng này";
-                return View("NotFound");
-            }
-            createChapter.PublisherId = user.Id;
-            createChapter.NovelId = novel.Id;
+            var allChapters = await _unitOfWork.Chapters.GetAllAsync(n => n.NovelId == novelId);
+
+            var totalChapter = allChapters.Count();
             createChapter.CreatedDate = DateTime.Now;
             if (!ModelState.IsValid) return View(createChapter);
             var chapter = _mapper.Map<Chapter>(createChapter);

@@ -90,7 +90,7 @@ namespace DocTruyen.Areas.User.Controllers
             return View(novelUpload);
         }
         [HttpPost]
-        public async Task<IActionResult> UploadNovel(UploadNovelVM novelUpload)
+        public async Task<IActionResult> UploadNovel(int novelId, UploadNovelVM novelUpload)
         {
             if (!ModelState.IsValid) return View(novelUpload);
             
